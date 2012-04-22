@@ -20,7 +20,7 @@ if [ -f "$layout_file" ]; then
   echo "window layout '$layout_name' already exists." >&2
   echo "" >&2
   echo "You can edit it with:" >&2
-  echo "  tmuxifier edit-window $layout_name" >&2
+  echo "  tmuxifier edit-window \"$layout_name\"" >&2
   exit 1
 fi
 

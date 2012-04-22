@@ -8,45 +8,68 @@ if [ "$1" == "--complete" ]; then
   exit
 fi
 
-case $1 in
+command="$1"
+command_path="$(command -v "tmuxifier-$command" || true)"
+
+# Attempt to resolve aliases
+if [ -z "$command_path" ]; then
+  resolved="$(tmuxifier-alias "$command")"
+  if [ ! -z "$resolved" ]; then
+    echo "'$command' is an alias for the '$resolved' command"
+    command="$resolved"
+    command_path="$(command -v "tmuxifier-$command" || true)"
+  fi
+fi
+
+case "$command" in
   "" )
     echo "usage: tmuxifier <command> [<args>]
 
 Some useful tmuxifier commands are:
-   session            Load the specified session layout.
-   window             Load the specified window layout into current session.
-   list               List all session and window layouts.
-   list-sessions      List session layouts.
-   list-windows       List window layouts.
-   new-session        Create new session layout and open it with \`\$EDITOR\`.
-   new-window         Create new window layout and open it with \`\$EDITOR\`.
-   edit-session       Edit specified session layout with \`\$EDITOR\`.
-   edit-window        Edit specified window layout with \`\$EDITOR\`.
-   commands           List all tmuxifier commands.
+   <command>      <alias>
+   load-session   s        Load the specified session layout.
+   load-window    w        Load the specified window layout into current session.
+   list           ls       List all session and window layouts.
+   list-sessions  lss      List session layouts.
+   list-windows   lsw      List window layouts.
+   new-session    ns       Create new session layout and open it with \$EDITOR.
+   new-window     nw       Create new window layout and open it with \$EDITOR.
+   edit-session   es       Edit specified session layout with \$EDITOR.
+   edit-window    ew       Edit specified window layout with \$EDITOR.
+   commands                List all tmuxifier commands.
 
 See 'tmuxifier help <command>' for information on a specific command."
     ;;
-  "session" )
-    echo "usage: tmuxifier session <layout_name>
+  "load-session" )
+    echo "usage: tmuxifier load-session <layout_name>
 
 Create a session using the session layout, unless the session already exists
 in which case, we simply switch to the existing one."
     ;;
-  "window" )
-    echo "usage: tmuxifier window <layout_name>
+  "load-window" )
+    echo "usage: tmuxifier load-window <layout_name>
 
 Create a new window using the specified window layout in the current session."
     ;;
+  "edit-session" )
+    echo "usage: tmuxifier edit-session <layout_name>
+
+Open specified session layout for editing in \$EDITOR."
+    ;;
+  "edit-window" )
+    echo "usage: tmuxifier edit-window <layout_name>
+
+Open specified window layout for editing in \$EDITOR."
+    ;;
   * )
-    command_path="$(command -v "tmuxifier-$1" || true)"
-    if [ -n "$command_path" ]; then
-      echo "Sorry, the '$1' command isn't documented yet."
+    if [ ! -z "$command_path" ]; then
+      echo "Sorry, the '$command' command isn't documented yet."
       echo
       echo "You can view the command's source here:"
       echo "$command_path"
       echo
     else
-      echo "tmuxifier: no such command \`$1'"
+      echo "tmuxifier: no such command '$command'"
     fi
     ;;
 esac

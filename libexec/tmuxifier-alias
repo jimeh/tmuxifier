@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+case "$1" in
+  "window" | "win" | "w" )
+    echo "load-window"
+    ;;
+  "session" | "ses" | "s" )
+    echo "load-session"
+    ;;
+  "new-ses" | "ns" )
+    echo "new-session"
+    ;;
+  "new-win" | "nw" )
+    echo "new-window"
+    ;;
+  "edit-ses" | "es" )
+    echo "edit-session"
+    ;;
+  "edit-win" | "ew" )
+    echo "edit-window"
+    ;;
+  "ls" )
+    echo "list"
+    ;;
+  "list-ses" | "lss" )
+    echo "list-sessions"
+    ;;
+  "list-win" | "lsw" )
+    echo "list-windows"
+    ;;
+esac

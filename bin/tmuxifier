@@ -25,7 +25,16 @@ case "$command" in
 
   * )
     command_path="$(command -v "tmuxifier-$command" || true)"
+
+    # Attempt to resolve aliases
     if [ -z $command_path ]; then
+      resolved="$(tmuxifier-alias "$command")"
+      if [ ! -z "$resolved" ]; then
+        command_path="$(command -v "tmuxifier-$resolved" || true)"
+      fi
+    fi
+
+    if [ -z "$command_path" ]; then
       echo "tmuxifier: no such command '$command'" >&2
       exit 1
     fi
