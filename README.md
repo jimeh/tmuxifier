@@ -3,16 +3,25 @@
 Tmuxify your Tmux. Create, edit and load complex Tmux session, window and pane
 configurations with ease.
 
-Tmuxifier is inspired by the excellent [tmuxinator][] Project. While
-tmuxinator is childishly easy to configure with it's YAML project files, it's
-also restricting me from the kind of powerful control I want over Tmux.
+In short, Tmuxifier allows you to easily create, edit and load "layout"
+files. A layout file is simply a shell script following a specific use pattern
+of the `tmux` command to create Tmux sessions and windows.
 
-[tmuxinator]: https://github.com/aziz/tmuxinator
+### Window Layouts
 
-To solve this problem, I opted for shell scripts with pretty helper functions
-instead of the cleaner but more limiting YAML config files. This allows you to
-create pre-defined session and window layouts with panes spit exactly as you
-like. You will need to be very familiar with a few of Tmux's commands however.
+Window layouts create a new Tmux window, optionally setting the window title
+and root path where all shells are cd'd to by default. It allows you to easily
+split a window into specifically sized panes and more as you wish.
+
+You can load a window layout directly into your current Tmux session, or into
+a session layout to have the window created along with the session.
+
+### Session Layouts
+
+Session layouts create a new Tmux session, optionally setting a session title
+and root path where all shells in the session are cd'd to by default. Windows
+can be added to the session either by loading existing window layouts, or
+defined directly within the session layout file.
 
 ## Example
 
@@ -63,6 +72,30 @@ that same path.
 export TMUXIFIER="$HOME/.dotfiles/tmuxifier"
 [[ -s "$TMUXIFIER/init.sh" ]] && source "$TMUXIFIER/init.sh"
 ```
+
+## Differences From Tmuxinator?
+
+Though Tmuxifier is largely inspired by the excellent [tmuxinator][] project,
+it does set itself apart in a number of ways:
+
+- Uses shell scripts to define Tmux sessions and windows instead of YAML
+  files. The benefit is total control over Tmux, but the definition files are
+  more complicated to work with.
+- Instead of using a "project" concept, Tmuxifier uses a concept of "sessions"
+  and "windows". This allows you to load a whole session with multiple
+  pre-defined window configurations, or just load a single window
+  configuration into your existing session.
+- Tmuxifier is a set of shell scripts, meaning it doesn't require Ruby to be
+  installed on the machine to work.
+
+## Inspiration
+
+- As mentioned above, Tmuxifier is largely inspired by [tmuxinator][].
+- I drew a lot of inspiration from [rbenv][] when it came to structuring the
+  project, shell commands, and completion.
+
+[tmuxinator]: https://github.com/aziz/tmuxinator
+[rbenv]: https://github.com/sstephenson/rbenv
 
 ## Heed My Warning
 
