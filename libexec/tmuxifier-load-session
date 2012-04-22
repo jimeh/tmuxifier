@@ -10,6 +10,11 @@ if [ "$1" == "--complete" ]; then
   exit
 fi
 
+if [ -z "$1" ]; then
+  echo "$(tmuxifier-help load-session)" >&2
+  exit 1
+fi
+
 # Load runtime functions.
 source "$TMUXIFIER/runtime.sh"
 

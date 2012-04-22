@@ -43,21 +43,43 @@ See 'tmuxifier help <command>' for information on a specific command."
   "load-session" )
     echo "usage: tmuxifier load-session <layout_name>
 
+Aliases: session, ses, s
+
 Create a session using the session layout, unless the session already exists
 in which case, we simply switch to the existing one."
     ;;
   "load-window" )
     echo "usage: tmuxifier load-window <layout_name>
 
+Aliases: window, win, w
+
 Create a new window using the specified window layout in the current session."
+    ;;
+  "new-session" )
+    echo "usage: tmuxifier new-session <layout_name>
+
+Aliases: new-ses, ns
+
+Create a new session layout and open it for editing in \$EDITOR."
+    ;;
+  "new-window" )
+    echo "usage: tmuxifier new-window <layout_name>
+
+Aliases: new-win, ws
+
+Create a new window layout and open it for editing in \$EDITOR."
     ;;
   "edit-session" )
     echo "usage: tmuxifier edit-session <layout_name>
+
+Aliases: edit-ses, es
 
 Open specified session layout for editing in \$EDITOR."
     ;;
   "edit-window" )
     echo "usage: tmuxifier edit-window <layout_name>
+
+Aliases: edit-win, ew
 
 Open specified window layout for editing in \$EDITOR."
     ;;
