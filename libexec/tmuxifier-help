@@ -15,7 +15,6 @@ command_path="$(command -v "tmuxifier-$command" || true)"
 if [ -z "$command_path" ]; then
   resolved="$(tmuxifier-alias "$command")"
   if [ ! -z "$resolved" ]; then
-    echo "'$command' is an alias for the '$resolved' command"
     command="$resolved"
     command_path="$(command -v "tmuxifier-$command" || true)"
   fi
