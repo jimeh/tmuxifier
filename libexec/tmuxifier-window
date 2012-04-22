@@ -17,6 +17,6 @@ if [ ! -z $TMUX ]; then
   session="$(tmuxifier-current-session)"
   load_window "$1"
 else
-  echo "ERROR: 'window' command can only be used from within Tmux."
+  echo "tmuxifier: 'window' command can only be used from within Tmux."
   exit 1
 fi
