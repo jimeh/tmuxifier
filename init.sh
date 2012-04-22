@@ -5,9 +5,6 @@ else
   export TMUXIFIER="${TMUXIFIER%/}"
 fi
 
-# Load tmuxifier environment variables.
-source "$TMUXIFIER/env.sh"
-
 # Add `bin` directroy to `$PATH`.
 export PATH="$TMUXIFIER/bin:$PATH"
 
