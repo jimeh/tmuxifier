@@ -36,6 +36,8 @@ Some useful tmuxifier commands are:
    edit-session   es       Edit specified session layout with \$EDITOR.
    edit-window    ew       Edit specified window layout with \$EDITOR.
    commands                List all tmuxifier commands.
+   version                 Print Tmuxifier version.
+   help                    Show this message.
 
 See 'tmuxifier help <command>' for information on a specific command."
     ;;
@@ -81,6 +83,32 @@ Open specified session layout for editing in \$EDITOR."
 Aliases: edit-win, ew
 
 Open specified window layout for editing in \$EDITOR."
+    ;;
+  "completions" )
+    echo "usage: tmuxifier completion <command>
+
+Print a list of available completions for specified command."
+    ;;
+  "list" )
+    echo "usage: tmuxifier list
+
+Aliases: ls
+
+List all available session and window layouts."
+    ;;
+  "list-sessions" )
+    echo "usage: tmuxifier list-sessions
+
+Aliases: list-ses, lss
+
+List all session layouts."
+    ;;
+  "list-windows" )
+    echo "usage: tmuxifier list-windows
+
+Aliases: list-win, lsw
+
+List all window layouts."
     ;;
   * )
     if [ ! -z "$command_path" ]; then
