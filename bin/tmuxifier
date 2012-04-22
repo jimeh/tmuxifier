@@ -15,9 +15,14 @@ export PATH="$TMUXIFIER/libexec:$PATH"
 
 command="$1"
 case "$command" in
-  "" | "-h" | "--help" | "help" )
-    echo "[ put help message here ]"
+  "" | "-h" | "--help" )
+    echo -e "tmuxifier $(tmuxifier-version)\n$(tmuxifier-help)" >&2
     ;;
+
+  "-v" | "--version" )
+    tmuxifier-version
+    ;;
+
   * )
     command_path="$(command -v "tmuxifier-$command" || true)"
     if [ -z $command_path ]; then
