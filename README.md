@@ -103,6 +103,12 @@ Tmuxifier is pretty much an alpha product at this point. Documentation is
 sketchy at best, and things might drastically change further down the line. If
 that doesn't put you off, enjoy Tmuxifier :)
 
+## Todo
+
+* Improve Readme.
+* Expand `help` command with details for most commands, rather than just the
+  essential ones.
+
 ## License
 
 Released under the MIT license. Copyright (c) 2012 Jim Myhrberg.
