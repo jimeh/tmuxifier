@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+# Provide tmuxifier completions
+if [ "$1" == "--complete" ]; then
+  for item in $(tmuxifier-list-sessions); do
+    echo "$item"
+  done
+  exit
+fi
+
+# Load runtime functions.
+source "$TMUXIFIER/runtime.sh"
+
+load_session "$1"

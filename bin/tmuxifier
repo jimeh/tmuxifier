@@ -1,0 +1,31 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+if [ -z "${TMUXIFIER}" ]; then
+  export TMUXIFIER="${HOME}/.tmuxifier"
+else
+  export TMUXIFIER="${TMUXIFIER%/}"
+fi
+
+# Load tmuxifier environment variables.
+source "$TMUXIFIER/env.sh"
+
+export PATH="$TMUXIFIER/libexec:$PATH"
+
+command="$1"
+case "$command" in
+  "" | "-h" | "--help" | "help" )
+    echo "[ put help message here ]"
+    ;;
+  * )
+    command_path="$(command -v "tmuxifier-$command" || true)"
+    if [ -z $command_path ]; then
+      echo "tmuxifier: no such command '$command'" >&2
+      exit 1
+    fi
+
+    shift 1
+    exec "$command_path" "$@"
+    ;;
+esac

@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+echo ""
+echo "Sessions:"
+tmuxifier-list-sessions
+echo ""
+echo "Windows:"
+tmuxifier-list-windows
+echo ""

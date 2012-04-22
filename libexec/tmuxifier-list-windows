@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+list=$(find "$TMUXIFIER_LAYOUT_PATH" -name "*.window.sh")
+for file in $list; do
+  file=${file/$TMUXIFIER_LAYOUT_PATH\//}
+  echo "  ${file/.window.sh/}"
+done

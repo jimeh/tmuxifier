@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+shopt -s nullglob
+
+{ for path in ${PATH//:/$'\n'}; do
+    for command in "${path}/tmuxifier-"*; do
+      command="${command##*tmuxifier-}"
+      echo ${command##sh-}
+    done
+  done
+} | sort | uniq
