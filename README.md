@@ -1,4 +1,4 @@
-# tmuxifier
+# Tmuxifier
 
 Tmuxify your Tmux. Create, edit and load complex Tmux session, window and pane
 configurations with ease.
@@ -16,8 +16,10 @@ like. You will need to be very familiar with a few of Tmux's commands however.
 
 ## Example
 
-Given with have a window layout file called `example.window.sh` which looks
-like:
+Given we have a window layout file called [example.window.sh][example] which
+looks like:
+
+[example]: https://github.com/jimeh/tmuxifier/blob/master/examples/example.window.sh
 
 ```bash
 window_name "Example Window"
@@ -61,6 +63,12 @@ that same path.
 export TMUXIFIER="$HOME/.dotfiles/tmuxifier"
 [[ -s "$TMUXIFIER/init.sh" ]] && source "$TMUXIFIER/init.sh"
 ```
+
+## Heed My Warning
+
+Tmuxifier is pretty much an alpha product at this point. Documentation is
+sketchy at best, and things might drastically change further down the line. If
+that doesn't put you off, enjoy Tmuxifier :)
 
 ## License
 
