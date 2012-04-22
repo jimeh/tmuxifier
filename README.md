@@ -35,11 +35,9 @@ current tmux session using:
 tmuxifier window example
 ```
 
-Which will yield a window looking like this:
+Which will yield a Tmux window looking like this:
 
-<div style="text-align: center">
-  <img src="https://github.com/jimeh/tmuxifier/raw/master/examples/example.window-screenshot.png" alt="example" />
-</div>
+![example](https://github.com/jimeh/tmuxifier/raw/master/examples/example.window-screenshot.png)
 
 ## Installation
 
