@@ -3,9 +3,9 @@
 Tmuxify your Tmux. Create, edit and load complex Tmux session, window and pane
 configurations with ease.
 
-Tmuxifier is inspired the excellent [tmuxinator][] Project. While tmuxinator
-is childishly easy to configure with it's YAML project files, it's also
-restricting me from the kind of powerful control I want over Tmux.
+Tmuxifier is inspired by the excellent [tmuxinator][] Project. While
+tmuxinator is childishly easy to configure with it's YAML project files, it's
+also restricting me from the kind of powerful control I want over Tmux.
 
 [tmuxinator]: https://github.com/aziz/tmuxinator
 
@@ -35,6 +35,12 @@ current tmux session using:
 tmuxifier window example
 ```
 
+Which will yield a window looking like this:
+
+<div style="text-align: center">
+  <img src="https://github.com/jimeh/tmuxifier/raw/master/examples/example.window-screenshot.png" alt="example" />
+</div>
+
 ## Installation
 
 ```bash
@@ -50,7 +56,8 @@ And add the following to your `~/.profile` or equivalent:
 ### Custom Installaton Path
 
 To install Tmuxifier to a custom path, clone the repository to your desired
-path, and set `$TMUXIFIER` to that path. For example:
+path, and set `$TMUXIFIER` to that path, additionally loading `init.sh` from
+that same path.
 
 ```bash
 export TMUXIFIER="$HOME/.dotfiles/tmuxifier"
