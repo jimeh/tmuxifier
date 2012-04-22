@@ -119,11 +119,13 @@ it does set itself apart in a number of ways:
 
 ## Heed My Warning
 
-Tmuxifier is pretty much an alpha product at this point. Documentation is
-sketchy at best, and things might drastically change and/or break. If
-that doesn't put you off, please enjoy Tmuxifier :)
+Tmuxifier is pretty much an alpha product hacked together over a weekend at
+this point. Documentation is sketchy at best, and things might drastically
+change and/or break.
 
-## Todo
+But if that doesn't put you off, please enjoy Tmuxifier :)
+
+## Todos
 
 * Improve Readme.
 * Expand `help` command with details for most commands, rather than just the
