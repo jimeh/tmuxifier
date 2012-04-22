@@ -2,6 +2,12 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier completions
+if [ "$1" == "--complete" ]; then
+  tmuxifier-commands
+  exit
+fi
+
 has-completions() {
   grep -i "^# provide tmuxifier completions" "$1" >/dev/null
 }
