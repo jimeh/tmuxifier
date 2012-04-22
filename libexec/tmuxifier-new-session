@@ -1,0 +1,28 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+if [ -z "$1" ]; then
+  echo "usage: tmuxifier new-session <layout_name>" >&2
+  exit 1
+fi
+
+layout_name="$1"
+layout_file="$TMUXIFIER_LAYOUT_PATH/${layout_name}.session.sh"
+template="$TMUXIFIER/templates/session.sh"
+
+if [ ! -f "$template" ]; then
+  echo "tmuxifier: session layout template not found: $template" >&2
+  exit 1
+fi
+
+if [ -f "$layout_file" ]; then
+  echo "session layout '$layout_name' already exists." >&2
+  echo "" >&2
+  echo "You can edit it with:" >&2
+  echo "  tmuxifier edit-session $layout_name" >&2
+  exit 1
+fi
+
+cp "$template" "$layout_file"
+exec "$EDITOR" "$layout_file"

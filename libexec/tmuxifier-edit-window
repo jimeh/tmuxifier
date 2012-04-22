@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+# Provide tmuxifier completions
+if [ "$1" == "--complete" ]; then
+  for item in $(tmuxifier-list-windows); do
+    echo "$item"
+  done
+  exit
+fi
+
+if [ -z "$1" ]; then
+  echo "usage: tmuxifier edit-window <layout_name>" >&2
+  exit 1
+fi
+
+layout_name="$1"
+layout_file="$TMUXIFIER_LAYOUT_PATH/${layout_name}.window.sh"
+
+if [ ! -f "$layout_file" ]; then
+  echo "tmuxifier: window layout '$layout_name' does not exist." >&2
+  echo "" >&2
+  echo "You can create it with:" >&2
+  echo "  tmuxifier new-window $layout_name" >&2
+  exit 1
+fi
+
+exec "$EDITOR" "$layout_file"
