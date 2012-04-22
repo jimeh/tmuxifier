@@ -140,7 +140,7 @@ __expand_path() {
 
 __go_to_session() {
   if [ -z $TMUX ]; then
-    tmux -u attach-sessions -t "$session"
+    tmux -u attach-session -t "$session"
   else
     tmux -u switch-client -t "$session"
   fi
