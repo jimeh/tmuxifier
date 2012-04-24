@@ -24,5 +24,6 @@ if [ -f "$layout_file" ]; then
   exit 1
 fi
 
-cp "$template" "$layout_file"
+content="$(cat "$template")"
+echo "${content/\{\{WINDOW_NAME\}\}/$layout_name}" > "$layout_file"
 exec "$EDITOR" "$layout_file"

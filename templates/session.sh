@@ -1,14 +1,16 @@
-# Set custom session name. Default is based on filename.
-# session_name "Example Session"
+# Set a custom session root path. Default is `$HOME`.
+# Must be called before `initialize_session`.
+#session_root "~/Projects/example"
 
-# Set a custom session root. Default is `$HOME`.
-# session_root "~/Projects/example"
+# Create session with specified name if it does not already exist. If no
+# argument is given, session name will be based on layout file name.
+if initialize_session "{{SESSION_NAME}}"; then
 
-# Create session if it does not already exist.
-if initialize_session; then
+  # Create a new window inline within session layout definition.
+  #new_window "misc"
 
-  # Load window layouts if session was created.
-  # load_window "example"
+  # Load a defined window layout.
+  #load_window "example"
 
 fi
 
