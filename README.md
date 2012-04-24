@@ -101,15 +101,15 @@ export TMUXIFIER_NO_COMPLETE=1
 ## Tmuxifier vs. Tmuxinator
 
 Though Tmuxifier is largely inspired by the excellent [Tmuxinator][] project,
-it does set itself apart in a number of ways:
+but does set itself apart in a number of ways:
 
 - Uses shell scripts to define Tmux sessions and windows instead of YAML
   files. The benefit is total control over Tmux, but the definition files are
   more complicated to work with.
 - Instead of using a "project" concept, Tmuxifier uses a concept of "sessions"
-  and "windows". This allows you to load a whole session with multiple
-  pre-defined window configurations, or just load a single window
-  configuration into your existing session.
+  and "windows" just like Tmux itself. This allows you to load a whole session
+  with multiple pre-defined window configurations, or just load a single
+  window configuration into your existing session.
 - Tmuxifier is a set of shell scripts, meaning it doesn't require Ruby to be
   installed on the machine.
 
