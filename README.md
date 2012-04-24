@@ -1,11 +1,11 @@
 # Tmuxifier
 
-Tmuxify your Tmux. Create, edit and load complex Tmux session, window and pane
-configurations with ease.
+Tmuxify your Tmux. Create, edit, mangage and load complex Tmux session, window
+and pane configurations with ease.
 
-In short, Tmuxifier allows you to easily create, edit and load "layout"
-files. A layout file is simply a shell script following a specific use pattern
-of the `tmux` command to create Tmux sessions and windows.
+In short, Tmuxifier allows you to easily create, edit, and load "layout"
+files, which are simple shell scripts where you use the `tmux` command and
+helper commands provided by tmuxifier to manage Tmux sessions and windows
 
 ### Window Layouts
 
@@ -31,9 +31,8 @@ looks like:
 [example]: https://github.com/jimeh/tmuxifier/blob/master/examples/example.window.sh
 
 ```bash
-window_name "Example Window"
 window_root "~/Desktop"
-tmux new-window -t "$session" -n "$window"
+new_window "Example Window"
 tmux split-window -t "$session:$window.0" -v -p 20 "watch -t date"
 tmux split-window -t "$session:$window.1" -h -p 60
 tmux select-pane -t "$session:$window.0"
@@ -67,7 +66,7 @@ And add the following to your `~/.profile` or equivalent:
 ### Custom Installaton Path
 
 To install Tmuxifier to a custom path, clone the repository to your desired
-path, and set `$TMUXIFIER` to that path, additionally loading `init.sh` from
+path and set `$TMUXIFIER` to that path, additionally loading `init.sh` from
 that same path.
 
 ```bash
@@ -86,7 +85,7 @@ export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
 
 ### Disable Shell-Completion
 
-Tmuxifier comes with shell-completion for bash and zsh shells. If for any
+Tmuxifier comes with shell-completion for bash and zsh. If for any
 reason you need to disable it, just set `$TMUXIFIER_NO_COMPLETE`.
 
 ```bash
