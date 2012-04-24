@@ -1,18 +1,16 @@
-# Set custom session name. Default is based on filename.
-session_name "Example Session"
-
-# Set a custom session root. Default is `$HOME`.
+# Set a custom session root path. Default is `$HOME`.
+# Must be called before `initialize_session`.
 session_root "~/Documents"
 
-# Create session if it does not already exist.
-if initialize_session; then
+# Create session with specified name if it does not already exist. If no
+# argument is given, session name will be based on layout file name.
+if initialize_session "Example Session"; then
 
   # Example of loading an existing window layout.
   load_window "example"
 
   # Example of in-line window definition
-  window_name "In-line Window"
-  tmux new-window -t "$session" -n "$window"
+  new_window "In-line Window"
   tmux split-window -t "$session:$window.0" -v -p 50
 
 fi
