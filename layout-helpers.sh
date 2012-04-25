@@ -7,6 +7,11 @@
 #
 
 # Create a new window.
+#
+# Arguments:
+#   - $1: (optional) Name/title of window.
+#   - $2: (optional) Shell command to execute when window is created.
+#
 new_window() {
   if [ ! -z "$1" ]; then
     window="$1"
@@ -21,6 +26,10 @@ new_window() {
 }
 
 # Load specified window layout.
+#
+# Arguments:
+#   - $1: Name of window layout to load.
+#
 load_window() {
   local file="$TMUXIFIER_LAYOUT_PATH/$1.window.sh"
   if [ -f "$file" ]; then
@@ -38,6 +47,10 @@ load_window() {
 }
 
 # Load specified session layout.
+#
+# Arguments:
+#   - $1: Name of session layout to load.
+#
 load_session() {
   local file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
   if [ -f "$file" ]; then
@@ -55,6 +68,10 @@ load_session() {
 }
 
 # Cusomize session root path. Default is `$HOME`.
+#
+# Arguments:
+#   - $1: Directory path to use for session root.
+#
 session_root() {
   local dir="$(__expand_path $@)"
   if [ -d "$dir" ]; then
@@ -63,6 +80,10 @@ session_root() {
 }
 
 # Customize window root path. Default is `$session_root`.
+#
+# Arguments:
+#   - $1: Directory path to use for window root.
+#
 window_root() {
   local dir="$(__expand_path $@)"
   if [ -d "$dir" ]; then
@@ -71,6 +92,10 @@ window_root() {
 }
 
 # Create a new session, returning 0 on success, 1 on failure.
+#
+# Arguments:
+#   - $1: (optional) Name of session to create, if not specified `$session`
+#         is used.
 #
 # Example usage:
 #
