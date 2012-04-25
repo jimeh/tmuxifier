@@ -85,6 +85,7 @@ initialize_session() {
 
     # Set default-path for session
     if [ ! -z "$session_root" ] && [ -d "$session_root" ]; then
+      cd "$session_root"
       tmux set-option -t "$session" default-path "$session_root" 1>/dev/null
     fi
 
