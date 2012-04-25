@@ -9,7 +9,7 @@ source "$TMUXIFIER/env.sh"
 session_root="$HOME"
 
 # Load layout helper functions.
-source "$TMUXIFIER/layout-helpers.sh"
+source "$TMUXIFIER/lib/layout-helpers.sh"
 
 
 #
