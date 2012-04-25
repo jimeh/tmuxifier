@@ -12,6 +12,9 @@ if initialize_session "{{SESSION_NAME}}"; then
   # Load a defined window layout.
   #load_window "example"
 
+  # Select the default active window on session creation.
+  #select_window 1
+
 fi
 
 # Finalize session creation and switch/attach to it.
