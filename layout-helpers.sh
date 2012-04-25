@@ -25,6 +25,15 @@ new_window() {
   eval "tmux new-window -t \"$session:\" $winarg $command"
 }
 
+# Select a specific window.
+#
+# Arguments:
+#   - $1: Window ID or name to select.
+#
+select_window() {
+  tmux select-window -t "$session:$1"
+}
+
 # Load specified window layout.
 #
 # Arguments:
