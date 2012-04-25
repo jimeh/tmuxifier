@@ -74,9 +74,7 @@ window and session layout files. New layout files are populated with examples
 and comments explaining what things do. Also, having a look at the
 [examples][] directory will also give you a good idea.
 
-### Getting Started
-
-#### Window Layouts
+### Window Layouts
 
 First off you'll want to define a window layout:
 
@@ -86,14 +84,14 @@ This will create a new layout file called `my-awesome-window.window.sh` in
 your `$TMUXIFIER_LAYOUT_PATH`, and open it with the editor defined in
 `$EDITOR`. Customize it as you wish, and save.
 
-You can now load "my-awesome-window" with the following command:
+You can now load *my-awesome-window* with the following command:
 
     tmuxifier load-window my-awesome-window
 
 You should now have a new Tmux window open created from your custom and
 awesome window layout.
 
-#### Session Layouts
+### Session Layouts
 
 To create your first session layout, run:
 
