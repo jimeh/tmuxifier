@@ -20,6 +20,7 @@ load_window() {
   if [ -f "$file" ]; then
     window="$1"
     source "$file"
+    window=""
 
     # Reset `$window_root`.
     if [[ "$window_root" != "$session_root" ]]; then
@@ -36,6 +37,7 @@ load_session() {
   if [ -f "$file" ]; then
     session="$1"
     source "$file"
+    session=
 
     # Reset `$session_root`.
     if [[ "$session_root" != "$HOME" ]]; then
