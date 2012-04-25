@@ -55,22 +55,24 @@ Which will yield a Tmux window looking like this:
 git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 ```
 
-And add the following to your `~/.profile` or equivalent:
+And add the following to your `~/.profile`, `~/.bash_profile` or equivalent:
 
 ```bash
 [[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"
 ```
 
-## Quick Start
+## Usage
 
-```bash
-tmuxifier help
-```
+*__Note:__ This section needs expanding upon.*
+
+For a quick reference on available commands, please run:
+
+    tmuxifier help
 
 Tmuxifier doesn't come with any layouts, so you'll want to create your own
 window and session layout files. New layout files are populated with examples
 and comments explaining what things do. Also, having a look at the
-[examples][] directory will also be good for you.
+[examples][] directory will also give you a good idea.
 
 [examples]: https://github.com/jimeh/tmuxifier/tree/master/examples
 
@@ -139,7 +141,7 @@ But if that doesn't put you off, please enjoy Tmuxifier :)
 
 ## Todos
 
-* Improve Readme.
+* Improve Readme, specially Usage section.
 * Expand `help` command with details for most commands, rather than just the
   essential ones.
 
