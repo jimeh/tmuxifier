@@ -11,7 +11,13 @@ new_window() {
   if [ ! -z "$1" ]; then
     window="$1"
   fi
-  tmux new-window -t "$session:" -n "$window"
+  if [ ! -z "$2" ]; then
+    local command="\"$2\""
+  fi
+  if [ ! -z "$window" ]; then
+    local winarg="-n \"$window\""
+  fi
+  eval "tmux new-window -t \"$session:\" $winarg $command"
 }
 
 # Load specified window layout.
