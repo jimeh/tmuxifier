@@ -25,7 +25,7 @@ if [ -f "$layout_file" ]; then
 fi
 
 content="$(cat "$template")"
-echo "${content/\{\{WINDOW_NAME\}\}/$layout_name}" > "$layout_file"
+echo "${content//\{\{WINDOW_NAME\}\}/$layout_name}" > "$layout_file"
 
 if [ ! -z "$EDITOR" ]; then
   exec "$EDITOR" "$layout_file"
