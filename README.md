@@ -25,10 +25,10 @@ defined directly within the session layout file.
 
 ## Example
 
-Given we have a window layout file called [example.window.sh][example] which
+Given we have a window layout file called [example.window.sh][] which
 looks like:
 
-[example]: https://github.com/jimeh/tmuxifier/blob/master/examples/example.window.sh
+[example.window.sh]: https://github.com/jimeh/tmuxifier/blob/master/examples/example.window.sh
 
 ```bash
 window_root "~/Desktop"
@@ -60,6 +60,19 @@ And add the following to your `~/.profile` or equivalent:
 ```bash
 [[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"
 ```
+
+## Quick Start
+
+```bash
+tmuxifier help
+```
+
+Tmuxifier doesn't come with any layouts, so you'll want to create your own
+window and session layout files. New layout files are populated with examples
+and comments explaining what things do. Also, having a look at the
+[examples][] directory will also be good for you.
+
+[examples]: https://github.com/jimeh/tmuxifier/tree/master/examples
 
 ## Configure & Customize
 
