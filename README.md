@@ -65,7 +65,7 @@ And add the following to your `~/.profile`, `~/.bash_profile` or equivalent:
 
 *__Note:__ This section needs expanding upon.*
 
-For a quick reference on available commands, please run:
+For a quick reference on available commands and their aliases, please run:
 
     tmuxifier help
 
@@ -73,6 +73,43 @@ Tmuxifier doesn't come with any layouts, so you'll want to create your own
 window and session layout files. New layout files are populated with examples
 and comments explaining what things do. Also, having a look at the
 [examples][] directory will also give you a good idea.
+
+### Getting Started
+
+#### Window Layouts
+
+First off you'll want to define a window layout:
+
+    tmuxifier new-window my-awesome-window
+
+This will create a new layout file called `my-awesome-window.window.sh` in
+your `$TMUXIFIER_LAYOUT_PATH`, and open it with the editor defined in
+`$EDITOR`. Customize it as you wish, and save.
+
+You can now load "my-awesome-window" with the following command:
+
+    tmuxifier load-window my-awesome-window
+
+You should now have a new Tmux window open created from your custom and
+awesome window layout.
+
+#### Session Layouts
+
+To create your first session layout, run:
+
+    tmuxifier new-session my-awesome-session
+
+Same deal as with creating a new window, except the filename ends with
+`.session.sh` instead of `.window.sh`, and the file's pre-populated content
+looks different. To have your awesome window loaded, add `load_window
+"my-awesome-window"` to the session layout next to existing examples.
+
+To load the session layout simply run:
+
+    tmuxifier load-session my-awesome-session
+
+You'll now have a new Tmux session with your previously defined awesome window
+in it.
 
 [examples]: https://github.com/jimeh/tmuxifier/tree/master/examples
 
@@ -168,4 +205,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
