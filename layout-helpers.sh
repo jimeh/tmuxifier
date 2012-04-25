@@ -25,6 +25,8 @@ load_window() {
     if [[ "$window_root" != "$session_root" ]]; then
       window_root "$session_root"
     fi
+  else
+    echo "No such window layout found '$1' in '$TMUXIFIER_LAYOUT_PATH'."
   fi
 }
 
@@ -39,6 +41,8 @@ load_session() {
     if [[ "$session_root" != "$HOME" ]]; then
       session_root="$HOME"
     fi
+  else
+    echo "No such session layout found '$1' in '$TMUXIFIER_LAYOUT_PATH'."
   fi
 }
 

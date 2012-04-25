@@ -26,4 +26,12 @@ fi
 
 content="$(cat "$template")"
 echo "${content/\{\{WINDOW_NAME\}\}/$layout_name}" > "$layout_file"
-exec "$EDITOR" "$layout_file"
+
+if [ ! -z "$EDITOR" ]; then
+  exec "$EDITOR" "$layout_file"
+else
+  echo "Layout file has been created, but '\$EDITOR' is not set. Please "
+  echo "manually open the layout for editing:"
+  echo "$layout_file"
+  echo
+fi
