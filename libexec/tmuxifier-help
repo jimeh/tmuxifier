@@ -12,7 +12,7 @@ command="$1"
 
 # Lookup command, attempt to resolve as alias if fails
 ! command_path="$(command -v "tmuxifier-$command")"
-if [ ! -n $? ]; then
+if [ -z "$command_path" ]; then
   resolved="$(tmuxifier-alias "$command")"
   if [ ! -z "$resolved" ]; then
     command="$resolved"
