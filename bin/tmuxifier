@@ -24,13 +24,13 @@ case "$command" in
     ;;
 
   * )
-    command_path="$(command -v "tmuxifier-$command" || true)"
+    ! command_path="$(command -v "tmuxifier-$command")"
 
     # Attempt to resolve aliases
     if [ -z "$command_path" ]; then
       resolved="$(tmuxifier-alias "$command")"
       if [ ! -z "$resolved" ]; then
-        command_path="$(command -v "tmuxifier-$resolved" || true)"
+        ! command_path="$(command -v "tmuxifier-$resolved")"
       fi
     fi
 

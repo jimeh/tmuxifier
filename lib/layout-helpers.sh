@@ -157,7 +157,7 @@ initialize_session() {
 # created, the session already exists, and we'll need to specifically switch
 # to it here.
 finalize_and_go_to_session() {
-  tmux kill-window -t "$session:99" 2>/dev/null || true
+  ! tmux kill-window -t "$session:99" 2>/dev/null
   if [[ "$(tmuxifier-current-session)" != "$session" ]]; then
     __go_to_session
   fi
