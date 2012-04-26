@@ -16,13 +16,14 @@ new_window() {
   if [ ! -z "$1" ]; then
     window="$1"
   fi
+  local command=()
   if [ ! -z "$2" ]; then
-    local command="\"$2\""
+    command+=("$2")
   fi
   if [ ! -z "$window" ]; then
-    local winarg="-n \"$window\""
+    local winarg=(-n "$window")
   fi
-  eval "tmux new-window -t \"$session:\" $winarg $command"
+  tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
 }
 
 # Select a specific window.
