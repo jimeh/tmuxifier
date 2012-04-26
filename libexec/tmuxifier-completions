@@ -18,10 +18,9 @@ if [ -z "$command" ]; then
   exit 1
 fi
 
+# Lookup command, attempt to resolve as alias if fails
 ! command_path="$(command -v "tmuxifier-$command")"
-
-# Attempt to resolve aliases
-if [ -z "$command_path" ]; then
+if [ ! -n $? ]; then
   resolved="$(tmuxifier-alias "$command")"
   if [ ! -z "$resolved" ]; then
     ! command_path="$(command -v "tmuxifier-$resolved")"

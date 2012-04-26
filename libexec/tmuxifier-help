@@ -9,10 +9,10 @@ if [ "$1" == "--complete" ]; then
 fi
 
 command="$1"
-! command_path="$(command -v "tmuxifier-$command")"
 
-# Attempt to resolve aliases
-if [ -z "$command_path" ]; then
+# Lookup command, attempt to resolve as alias if fails
+! command_path="$(command -v "tmuxifier-$command")"
+if [ ! -n $? ]; then
   resolved="$(tmuxifier-alias "$command")"
   if [ ! -z "$resolved" ]; then
     command="$resolved"
