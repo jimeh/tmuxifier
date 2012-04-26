@@ -30,4 +30,7 @@ case "$1" in
   "list-win" | "lsw" )
     echo "list-windows"
     ;;
+  * )
+    echo "unknown alias \"$1\""
+    exit 1
 esac
