@@ -13,14 +13,14 @@
 #   - $2: (optional) Shell command to execute when window is created.
 #
 new_window() {
-  if [ ! -z "$1" ]; then
+  if [ -n "$1" ]; then
     window="$1"
   fi
   local command=()
-  if [ ! -z "$2" ]; then
+  if [ -n "$2" ]; then
     command+=("$2")
   fi
-  if [ ! -z "$window" ]; then
+  if [ -n "$window" ]; then
     local winarg=(-n "$window")
   fi
   tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
@@ -114,7 +114,7 @@ window_root() {
 #   fi
 #
 initialize_session() {
-  if [ ! -z "$1" ]; then
+  if [ -n "$1" ]; then
     session="$1"
   fi
 
@@ -127,7 +127,7 @@ initialize_session() {
     env TMUX= tmux new-session -d -s "$session"
 
     # Set default-path for session
-    if [ ! -z "$session_root" ] && [ -d "$session_root" ]; then
+    if [ -n "$session_root" ] && [ -d "$session_root" ]; then
       cd "$session_root"
       tmux set-option -t "$session" default-path "$session_root" 1>/dev/null
     fi
@@ -180,7 +180,7 @@ __expand_path() {
 }
 
 __go_to_session() {
-  if [ -z $TMUX ]; then
+  if [ -z "$TMUX" ]; then
     tmux -u attach-session -t "$session"
   else
     tmux -u switch-client -t "$session"

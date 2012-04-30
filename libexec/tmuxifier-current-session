@@ -2,7 +2,7 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
-if [ ! -z $TMUX ]; then
+if [ -n "$TMUX" ]; then
   for item in $(tmux list-sessions -F "#{?session_attached,1,0}:#S"); do
     if [[ "$item" == "1:"* ]]; then
       echo ${item/1:/}
