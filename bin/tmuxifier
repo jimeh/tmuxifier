@@ -24,14 +24,7 @@ case "$command" in
     ;;
 
   * )
-    # Lookup command, attempt to resolve as alias if fails
-    ! command_path="$(command -v "tmuxifier-$command")"
-    if [ -z "$command_path" ]; then
-      resolved="$(tmuxifier-alias "$command")"
-      if [ ! -z "$resolved" ]; then
-        ! command_path="$(command -v "tmuxifier-$resolved")"
-      fi
-    fi
+    ! command_path="$(tmuxifier-resolve-command-path "$command")"
 
     if [ -z "$command_path" ]; then
       echo "tmuxifier: no such command '$command'" >&2
