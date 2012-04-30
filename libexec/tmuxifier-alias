@@ -31,6 +31,5 @@ case "$1" in
     echo "list-windows"
     ;;
   * )
-    echo "unknown alias \"$1\""
     exit 1
 esac

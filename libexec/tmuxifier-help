@@ -10,13 +10,11 @@ fi
 
 command="$1"
 
-# Lookup command, attempt to resolve as alias if fails
-! command_path="$(command -v "tmuxifier-$command")"
-if [ -z "$command_path" ]; then
-  resolved="$(tmuxifier-alias "$command")"
-  if [ ! -z "$resolved" ]; then
+# Ensure we have the correct command name in case an alias was given.
+if [ -n "$command" ]; then
+  ! resolved="$(tmuxifier-alias "$command")"
+  if [ -n "$resolved" ]; then
     command="$resolved"
-    ! command_path="$(command -v "tmuxifier-$command")"
   fi
 fi
 
@@ -111,14 +109,16 @@ Aliases: list-win, lsw
 List all window layouts."
     ;;
   * )
-    if [ ! -z "$command_path" ]; then
+    ! command_path="$(tmuxifier-resolve-command-path "$command")"
+    if [ -n "$command_path" ]; then
       echo "Sorry, the '$command' command isn't documented yet."
       echo
       echo "You can view the command's source here:"
       echo "$command_path"
       echo
     else
-      echo "tmuxifier: no such command '$command'"
+      echo "tmuxifier: no such command '$command'" >&2
+      exit 1
     fi
     ;;
 esac

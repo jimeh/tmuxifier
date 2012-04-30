@@ -1,0 +1,19 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+if [ -n "$1" ]; then
+  ! command_path="$(command -v "tmuxifier-$1")"
+  if [ -z "$command_path" ]; then
+    resolved="$(tmuxifier-alias "$1")"
+    if [ -n "$resolved" ]; then
+      ! command_path="$(command -v "tmuxifier-$resolved")"
+    fi
+  fi
+fi
+
+if [ -n "$command_path" ]; then
+  echo "$command_path"
+else
+  exit 1
+fi
