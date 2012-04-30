@@ -7,7 +7,7 @@ shopt -s nullglob
 { for path in ${PATH//:/$'\n'}; do
     for command in "${path}/tmuxifier-"*; do
       command="${command##*tmuxifier-}"
-      echo ${command##sh-}
+      echo "$command"
     done
   done
 } | sort | uniq
