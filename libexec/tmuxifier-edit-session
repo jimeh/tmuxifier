@@ -22,7 +22,7 @@ if [ ! -f "$layout_file" ]; then
   echo "tmuxifier: session layout '$layout_name' does not exist." >&2
   echo "" >&2
   echo "You can create it with:" >&2
-  echo "  tmuxifier new-session $layout_name" >&2
+  echo "  tmuxifier new-session '$layout_name'" >&2
   exit 1
 fi
 
