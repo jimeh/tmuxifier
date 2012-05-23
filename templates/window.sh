@@ -7,7 +7,12 @@
 new_window "{{WINDOW_NAME}}"
 
 # Split window into panes.
-#tmux split-window -t "$session:$window.0" -h -p 20
+#split_v 20
+#split_h 50
+
+# Run commands.
+#run_cmd "top"     # runs in active pane
+#run_cmd "date" 1  # runs in pane 1
 
 # Set active pane.
-#tmux select-pane -t "$session:$window.0"
+#select_pane 0
