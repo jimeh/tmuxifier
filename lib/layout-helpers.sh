@@ -17,6 +17,7 @@ new_window() {
   if [ -n "$2" ]; then local command=("$2"); fi
   if [ -n "$window" ]; then local winarg=(-n "$window"); fi
 
+  if [ -n "$window_root" ]; then cd "$window_root"; fi
   tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
 }
 
