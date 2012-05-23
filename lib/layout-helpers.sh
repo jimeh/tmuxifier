@@ -21,6 +21,28 @@ new_window() {
   tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
 }
 
+# Split current window/pane vertically.
+#
+# Arguments:
+#   - $1: (optional) Percentage of frame the new pane will use.
+#   - $2: (optional) Target pane ID to split in current window.
+#
+split_v() {
+  if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  tmux split-window -t "$session:$window.$2" -v "${percentage[@]}"
+}
+
+# Split current window/pane horizontally.
+#
+# Arguments:
+#   - $1: (optional) Percentage of frame the new pane will use.
+#   - $2: (optional) Target pane ID to split in current window.
+#
+split_h() {
+  if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  tmux split-window -t "$session:$window.$2" -h "${percentage[@]}"
+}
+
 # Select a specific window.
 #
 # Arguments:
@@ -28,6 +50,26 @@ new_window() {
 #
 select_window() {
   tmux select-window -t "$session:$1"
+}
+
+# Select a specific pane in the current window.
+#
+# Arguments:
+#   - $1: Pane ID to select.
+#
+select_pane() {
+  tmux select-pane -t "$session:$window.$1"
+}
+
+# Runs a shell command in the currently active pane/window.
+#
+# Arguments:
+#   - $1: Shell command to run.
+#   - $2: (optional) Target pane ID to run command in.
+#
+run_cmd() {
+  tmux send-keys -t "$session:$window.$2" -l "$1"
+  tmux send-keys -t "$session:$window.$2" "C-m"
 }
 
 # Cusomize session root path. Default is `$HOME`.
