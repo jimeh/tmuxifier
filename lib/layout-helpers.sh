@@ -29,6 +29,30 @@ select_window() {
   tmux select-window -t "$session:$1"
 }
 
+# Cusomize session root path. Default is `$HOME`.
+#
+# Arguments:
+#   - $1: Directory path to use for session root.
+#
+session_root() {
+  local dir="$(__expand_path $@)"
+  if [ -d "$dir" ]; then
+    session_root="$dir"
+  fi
+}
+
+# Customize window root path. Default is `$session_root`.
+#
+# Arguments:
+#   - $1: Directory path to use for window root.
+#
+window_root() {
+  local dir="$(__expand_path $@)"
+  if [ -d "$dir" ]; then
+    window_root="$dir"
+  fi
+}
+
 # Load specified window layout.
 #
 # Arguments:
@@ -68,30 +92,6 @@ load_session() {
     fi
   else
     echo "No such session layout found '$1' in '$TMUXIFIER_LAYOUT_PATH'."
-  fi
-}
-
-# Cusomize session root path. Default is `$HOME`.
-#
-# Arguments:
-#   - $1: Directory path to use for session root.
-#
-session_root() {
-  local dir="$(__expand_path $@)"
-  if [ -d "$dir" ]; then
-    session_root="$dir"
-  fi
-}
-
-# Customize window root path. Default is `$session_root`.
-#
-# Arguments:
-#   - $1: Directory path to use for window root.
-#
-window_root() {
-  local dir="$(__expand_path $@)"
-  if [ -d "$dir" ]; then
-    cd "$dir"
   fi
 }
 
