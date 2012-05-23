@@ -33,9 +33,10 @@ looks like:
 ```bash
 window_root "~/Desktop"
 new_window "Example Window"
-tmux split-window -t "$session:$window.0" -v -p 20 "watch -t date"
-tmux split-window -t "$session:$window.1" -h -p 60
-tmux select-pane -t "$session:$window.0"
+split_v 20
+run_cmd "watch -t date"
+split_h 60
+select_pane 0
 ```
 
 You can then load that window layout into a new window in the
