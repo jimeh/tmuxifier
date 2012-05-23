@@ -13,16 +13,10 @@
 #   - $2: (optional) Shell command to execute when window is created.
 #
 new_window() {
-  if [ -n "$1" ]; then
-    window="$1"
-  fi
-  local command=()
-  if [ -n "$2" ]; then
-    command+=("$2")
-  fi
-  if [ -n "$window" ]; then
-    local winarg=(-n "$window")
-  fi
+  if [ -n "$1" ]; then window="$1"; fi
+  if [ -n "$2" ]; then local command=("$2"); fi
+  if [ -n "$window" ]; then local winarg=(-n "$window"); fi
+
   tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
 }
 
@@ -45,7 +39,7 @@ load_window() {
   if [ -f "$file" ]; then
     window="$1"
     source "$file"
-    window=""
+    window=
 
     # Reset `$window_root`.
     if [[ "$window_root" != "$session_root" ]]; then
@@ -122,14 +116,14 @@ initialize_session() {
   tmux start-server
 
   # Check if the named session already exists.
-  if ! tmux has-session -t "$session" 2>/dev/null; then
+  if ! tmux has-session -t "$session:" 2>/dev/null; then
     # Create the new session.
-    env TMUX= tmux new-session -d -s "$session"
+    env TMUX="" tmux new-session -d -s "$session"
 
     # Set default-path for session
     if [ -n "$session_root" ] && [ -d "$session_root" ]; then
       cd "$session_root"
-      tmux set-option -t "$session" default-path "$session_root" 1>/dev/null
+      tmux set-option -t "$session:" default-path "$session_root" 1>/dev/null
     fi
 
     # In order to ensure only specified windows are created, we move the
@@ -156,6 +150,7 @@ initialize_session() {
 # If the session was created, we've already been switched to it. If it was not
 # created, the session already exists, and we'll need to specifically switch
 # to it here.
+#
 finalize_and_go_to_session() {
   ! tmux kill-window -t "$session:99" 2>/dev/null
   if [[ "$(tmuxifier-current-session)" != "$session" ]]; then
@@ -181,8 +176,8 @@ __expand_path() {
 
 __go_to_session() {
   if [ -z "$TMUX" ]; then
-    tmux -u attach-session -t "$session"
+    tmux -u attach-session -t "$session:"
   else
-    tmux -u switch-client -t "$session"
+    tmux -u switch-client -t "$session:"
   fi
 }
