@@ -7,8 +7,9 @@ window_root "~/Desktop"
 new_window "Example Window"
 
 # Split window into panes.
-tmux split-window -t "$session:$window.0" -v -p 20 "watch -t date"
-tmux split-window -t "$session:$window.1" -h -p 60
+split_v 20
+run_cmd "watch -t date"
+split_h 60
 
 # Set active pane.
-tmux select-pane -t "$session:$window.0"
+select_pane 0
