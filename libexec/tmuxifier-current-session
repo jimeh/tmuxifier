@@ -3,11 +3,9 @@ set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
 if [ -n "$TMUX" ]; then
-  for item in $(tmux list-sessions -F "#{?session_attached,1,0}:#S"); do
-    if [[ "$item" == "1:"* ]]; then
-      echo ${item/1:/}
-      exit 0
-    fi
+  for item in $(tmux list-pane -F "#{session_name}");do
+    echo $item
+    exit 0
   done
 fi
 
