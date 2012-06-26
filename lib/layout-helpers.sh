@@ -68,7 +68,12 @@ select_pane() {
 #   - $2: (optional) Target pane ID to run command in.
 #
 run_cmd() {
-  tmux send-keys -t "$session:$window.$2" -l "$1"
+  literal_support=$(tmux send-keys -l 2&> /dev/null ; echo $?)
+  if [ $literal_support -eq 0 ]; then
+    tmux send-keys -t "$session:$window.$2" -l "$1"
+  else
+    tmux send-keys -t "$session:$window.$2" "$1"
+  fi
   tmux send-keys -t "$session:$window.$2" "C-m"
 }
 
