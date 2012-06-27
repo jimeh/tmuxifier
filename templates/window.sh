@@ -14,5 +14,9 @@ new_window "{{WINDOW_NAME}}"
 #run_cmd "top"     # runs in active pane
 #run_cmd "date" 1  # runs in pane 1
 
+# Paste text
+#send_keys "top"    # paste into active pane
+#send_keys "date" 1 # paste into active pane
+
 # Set active pane.
 #select_pane 0
