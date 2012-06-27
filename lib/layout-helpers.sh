@@ -61,6 +61,16 @@ select_pane() {
   tmux select-pane -t "$session:$window.$1"
 }
 
+# Send/paste keys to the currently active pane/window.
+#
+# Arguments:
+#   - $1: String to paste.
+#   - $2: (optional) Target pane ID to send input to.
+#
+send_keys() {
+  tmux send-keys -t "$session:$window.$2" "$1"
+}
+
 # Runs a shell command in the currently active pane/window.
 #
 # Arguments:
@@ -68,13 +78,8 @@ select_pane() {
 #   - $2: (optional) Target pane ID to run command in.
 #
 run_cmd() {
-  literal_support=$(tmux send-keys -l 2&> /dev/null ; echo $?)
-  if [ $literal_support -eq 0 ]; then
-    tmux send-keys -t "$session:$window.$2" -l "$1"
-  else
-    tmux send-keys -t "$session:$window.$2" "$1"
-  fi
-  tmux send-keys -t "$session:$window.$2" "C-m"
+  send_keys "$1" "$2"
+  send_keys "C-m" "$2"
 }
 
 # Cusomize session root path. Default is `$HOME`.
