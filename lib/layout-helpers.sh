@@ -18,7 +18,7 @@ new_window() {
   if [ -n "$window" ]; then local winarg=(-n "$window"); fi
 
   tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
-  __goto_window_or_session_path
+  __go_to_window_or_session_path
 }
 
 # Split current window/pane vertically.
@@ -30,7 +30,7 @@ new_window() {
 split_v() {
   if [ -n "$1" ]; then local percentage=(-p "$1"); fi
   tmux split-window -t "$session:$window.$2" -v "${percentage[@]}"
-  __goto_window_or_session_path
+  __go_to_window_or_session_path
 }
 
 # Split current window/pane horizontally.
@@ -42,7 +42,7 @@ split_v() {
 split_h() {
   if [ -n "$1" ]; then local percentage=(-p "$1"); fi
   tmux split-window -t "$session:$window.$2" -h "${percentage[@]}"
-  __goto_window_or_session_path
+  __go_to_window_or_session_path
 }
 
 # Select a specific window.
@@ -237,7 +237,7 @@ __go_to_session() {
   fi
 }
 
-__goto_window_or_session_path() {
+__go_to_window_or_session_path() {
   local window_or_session_root=${window_root-$session_root}
   if [ -n "$window_or_session_root" ]; then
     run_cmd "cd \"$window_or_session_root\""
