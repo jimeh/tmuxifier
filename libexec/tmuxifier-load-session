@@ -19,7 +19,7 @@ fi
 source "$TMUXIFIER/runtime.sh"
 
 if [ ! -z $TMUX ]; then
-  load_session "$1"
+  load_session "$@"
 else
   echo "tmuxifier: 'load-session' command can only be used from within Tmux."
   exit 1

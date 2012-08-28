@@ -20,7 +20,7 @@ source "$TMUXIFIER/runtime.sh"
 
 if [ ! -z $TMUX ]; then
   session="$(tmuxifier-current-session)"
-  load_window "$1"
+  load_window "$@"
 else
   echo "tmuxifier: 'load-window' command can only be used from within Tmux."
   exit 1
