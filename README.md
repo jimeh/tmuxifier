@@ -71,8 +71,10 @@ equivalent:
 
 Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
 
-```bash
-[ -f "$HOME/.tmuxifier/init.tcsh" ] && source "$HOME/.tmuxifier/init.tcsh"
+```tcsh
+if ( -s "$HOME/.tmuxifier/init.sh" ) then
+  source "$HOME/.tmuxifier/init.sh"
+endif
 ```
 
 ## Usage
