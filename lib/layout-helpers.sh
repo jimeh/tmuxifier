@@ -182,9 +182,10 @@ initialize_session() {
     fi
 
     # In order to ensure only specified windows are created, we move the
-    # default window to position 99, and later remove it with the
-    # `finalize_session` function.
-    tmux move-window -s "$session:0" -t "$session:99"
+    # default window to position 999, and later remove it with the
+    # `finalize_and_go_to_session` function.
+    local first_window_index=$(__get_first_window_index)
+    tmux move-window -s "$session:$first_window_index" -t "$session:999"
 
     # Ensure correct pane splitting.
     __go_to_session
@@ -207,7 +208,7 @@ initialize_session() {
 # to it here.
 #
 finalize_and_go_to_session() {
-  ! tmux kill-window -t "$session:99" 2>/dev/null
+  ! tmux kill-window -t "$session:999" 2>/dev/null
   if [[ "$(tmuxifier-current-session)" != "$session" ]]; then
     __go_to_session
   fi
@@ -227,6 +228,16 @@ finalize_and_go_to_session() {
 #
 __expand_path() {
   echo $(eval echo "$@")
+}
+
+__get_first_window_index() {
+  local index
+  index=$(tmux list-windows -t "$session:" -F "#{window_index}" 2>/dev/null)
+  if [ -n "$index" ]; then
+    echo "$index" | head -1
+  else
+    echo "0"
+  fi
 }
 
 __go_to_session() {
