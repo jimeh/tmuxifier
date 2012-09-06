@@ -1,2 +1,2 @@
-complete tmuxifier 'p@1@`$HOME/.tmuxifier/bin/tmuxifier commands`@' \
-                   'p@2@`$HOME/.tmuxifier/bin/tmuxifier completions $:-1`@'
+complete tmuxifier 'p@1@`tmuxifier commands`@' \
+                   'p@2@`tmuxifier completions $:-1`@'
