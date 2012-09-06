@@ -52,14 +52,27 @@ Which will yield a Tmux window looking like this:
 
 ## Installation
 
+Clone the repo to your machine:
+
 ```bash
 git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 ```
 
-And add the following to your `~/.profile`, `~/.bash_profile` or equivalent:
+### Bash & ZSH
+
+And add the following to your `~/.profile`, `~/.bash_profile`, `~/.zshrc` or
+equivalent:
 
 ```bash
 [[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"
+```
+
+### TCSH
+
+Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
+
+```bash
+[ -f "$HOME/.tmuxifier/init.tcsh" ] && source "$HOME/.tmuxifier/init.tcsh"
 ```
 
 ## Usage
@@ -117,8 +130,8 @@ in it.
 ### Custom Installaton Path
 
 To install Tmuxifier to a custom path, clone the repository to your desired
-path and set `$TMUXIFIER` to that path, additionally loading `init.sh` from
-that same path.
+path and set `$TMUXIFIER` to that path, additionally loading `init.sh` or
+`init.tcsh` from that same path.
 
 ```bash
 export TMUXIFIER="$HOME/.dotfiles/tmuxifier"
