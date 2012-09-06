@@ -58,7 +58,7 @@ Clone the repo to your machine:
 git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 ```
 
-### Bash & ZSH
+### bash & zsh
 
 And add the following to your `~/.profile`, `~/.bash_profile`, `~/.zshrc` or
 equivalent:
@@ -67,7 +67,7 @@ equivalent:
 [[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"
 ```
 
-### TCSH
+### tcsh
 
 Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
 
