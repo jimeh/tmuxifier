@@ -208,7 +208,6 @@ initialize_session() {
 # to it here.
 #
 finalize_and_go_to_session() {
-<<<<<<< HEAD
   ! tmux kill-window -t "$session:999" 2>/dev/null
   if [[ "$(tmuxifier-current-session)" != "$session" ]]; then
     __go_to_session
