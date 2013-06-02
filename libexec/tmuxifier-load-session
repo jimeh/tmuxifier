@@ -18,9 +18,5 @@ fi
 # Load runtime functions.
 source "$TMUXIFIER/runtime.sh"
 
-if [ ! -z $TMUX ]; then
-  load_session "$1"
-else
-  echo "tmuxifier: 'load-session' command can only be used from within Tmux."
-  exit 1
-fi
+# Load session file.
+load_session "$1"
