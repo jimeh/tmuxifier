@@ -3,7 +3,7 @@
 #
 
 # Load tmuxifier environment.
-source "$TMUXIFIER/env.sh"
+source "$TMUXIFIER/lib/env.sh"
 
 # Setup default variables.
 session_root="$HOME"

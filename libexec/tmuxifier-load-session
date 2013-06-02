@@ -16,7 +16,7 @@ if [ -z "$1" ]; then
 fi
 
 # Load runtime functions.
-source "$TMUXIFIER/runtime.sh"
+source "$TMUXIFIER/lib/runtime.sh"
 
 # Load session file.
 load_session "$1"
