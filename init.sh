@@ -6,7 +6,9 @@ else
 fi
 
 # Add `bin` directroy to `$PATH`.
-export PATH="$TMUXIFIER/bin:$PATH"
+if [[ ":$PATH:" != *":$TMUXIFIER/bin:"* ]]; then
+  export PATH="$TMUXIFIER/bin:$PATH"
+fi
 
 # If `tmuxifier` is available, and `$TMUXIFIER_NO_COMPLETE` is not set, then
 # load tmuxifier shell completion.
