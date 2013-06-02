@@ -29,7 +29,7 @@ case "$shell" in
     profile='~/.tcshrc'
     ;;
   * )
-    profile='your shell init file'
+    profile='shell init file'
     ;;
 esac
 
