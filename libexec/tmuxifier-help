@@ -19,7 +19,7 @@ has-help() {
 }
 
 command="$1"
-if [ -z "$command" ]; then
+if [ -z "$1" ]; then
   echo "usage: tmuxifier <command> [<args>]
 
 Some useful tmuxifier commands are:
@@ -41,10 +41,10 @@ See 'tmuxifier help <command>' for information on a specific command."
   exit
 fi
 
-! command_path="$(tmuxifier-resolve-command-path "$command")"
+! command_path="$(tmuxifier-resolve-command-path "$1")"
 
 if [ -z "$command_path" ]; then
-  echo "tmuxifier: no such command '$command'" >&2
+  echo "tmuxifier: no such command '$1'" >&2
   exit 1
 fi
 
@@ -52,6 +52,8 @@ if has-help "$command_path"; then
   shift
   exec "$command_path" --help "$@"
 else
+  command="$(basename "$command_path")"
+  command="${command/tmuxifier\-/}"
   echo "Sorry, the '$command' command isn't documented yet."
   echo ""
   echo "You can view the command's source here:"
