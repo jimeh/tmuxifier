@@ -6,7 +6,7 @@ set -e
 if [ "$1" == "--help" ]; then
   echo "usage: tmuxifier edit-window <layout_name>
 
-Aliases: edit-win, ew
+Aliases: edit-win, ewin, ew
 
 Open specified window layout for editing in \$EDITOR."
   exit

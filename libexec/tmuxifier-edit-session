@@ -6,7 +6,7 @@ set -e
 if [ "$1" == "--help" ]; then
   echo "usage: tmuxifier edit-session <layout_name>
 
-Aliases: edit-ses, es
+Aliases: edit-ses, eses, es
 
 Open specified session layout for editing in \$EDITOR."
   exit

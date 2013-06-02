@@ -6,7 +6,7 @@ set -e
 if [ "$1" == "--help" ]; then
   echo "usage: tmuxifier list
 
-Aliases: ls
+Aliases: l
 
 List all available session and window layouts."
   exit

@@ -26,9 +26,9 @@ Some useful tmuxifier commands are:
    <command>      <alias>
    load-session   s        Load the specified session layout.
    load-window    w        Load the specified window layout into current session.
-   list           ls       List all session and window layouts.
-   list-sessions  lss      List session layouts.
-   list-windows   lsw      List window layouts.
+   list           l        List all session and window layouts.
+   list-sessions  ls       List session layouts.
+   list-windows   lw       List window layouts.
    new-session    ns       Create new session layout and open it with \$EDITOR.
    new-window     nw       Create new window layout and open it with \$EDITOR.
    edit-session   es       Edit specified session layout with \$EDITOR.

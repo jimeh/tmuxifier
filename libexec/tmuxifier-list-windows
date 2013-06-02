@@ -6,7 +6,7 @@ set -e
 if [ "$1" == "--help" ]; then
   echo "usage: tmuxifier list-windows
 
-Aliases: list-win, lsw
+Aliases: list-win, lwin, lw
 
 List all window layouts."
   exit

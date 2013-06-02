@@ -6,7 +6,7 @@ set -e
 if [ "$1" == "--help" ]; then
   echo "usage: tmuxifier list-sessions
 
-Aliases: list-ses, lss
+Aliases: list-ses, lses, ls
 
 List all session layouts."
   exit
