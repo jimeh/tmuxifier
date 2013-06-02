@@ -14,8 +14,12 @@ fi
 
 echo ""
 echo "Sessions:"
-tmuxifier-list-sessions
+for item in $(tmuxifier-list-sessions); do
+  echo " - $item"
+done
 echo ""
 echo "Windows:"
-tmuxifier-list-windows
+for item in $(tmuxifier-list-windows); do
+  echo " - $item"
+done
 echo ""
