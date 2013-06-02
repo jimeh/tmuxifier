@@ -2,6 +2,49 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+if [ "$1" == "-" ] || [ "$1" == "--help" ]; then
+  shell="$2"
+else
+  shell="$1"
+fi
+
+if [ -z "$shell" ]; then
+  shell="$(basename "$SHELL")"
+fi
+
+case "$shell" in
+  bash )
+    profile='~/.bash_profile'
+    ;;
+  zsh )
+    profile='~/.zshrc'
+    ;;
+  ksh )
+    profile='~/.profile'
+    ;;
+  csh )
+    profile='~/.cshrc'
+    ;;
+  tcsh )
+    profile='~/.tcshrc'
+    ;;
+  * )
+    profile='your shell init file'
+    ;;
+esac
+
+# Provide tmuxifier help
+if [[ " $@ " == *" --help "* ]]; then
+  echo "usage: tmuxifier init -
+
+Load Tmuxifier by adding the following to your ${profile}:
+
+    eval \"\$(tmuxifier init -)\"
+
+You might also need to add Tmuxifier's bin directory to your PATH."
+  exit
+fi
+
 print=""
 for args in "$@"; do
   if [ "$args" = "-" ]; then
@@ -10,40 +53,8 @@ for args in "$@"; do
   fi
 done
 
-shell="$1"
-if [ -z "$shell" ]; then
-  shell="$(basename "$SHELL")"
-fi
-
 if [ -z "$print" ]; then
-  case "$shell" in
-    bash )
-      profile='~/.bash_profile'
-      ;;
-    zsh )
-      profile='~/.zshrc'
-      ;;
-    ksh )
-      profile='~/.profile'
-      ;;
-    csh )
-      profile='~/.cshrc'
-      ;;
-    tcsh )
-      profile='~/.tcshrc'
-      ;;
-    * )
-      profile='your profile'
-      ;;
-  esac
-
-  { echo "# Load tmuxifier automatically by adding"
-    echo "# the following to ${profile}:"
-    echo
-    echo "eval \"\$(tmuxifier init -)\""
-    echo
-  } >&2
-
+  echo "$(tmuxifier-help init $@)" >&2
   exit 1
 fi
 
