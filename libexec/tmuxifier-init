@@ -1,0 +1,59 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+print=""
+for args in "$@"; do
+  if [ "$args" = "-" ]; then
+    print=1
+    shift
+  fi
+done
+
+shell="$1"
+if [ -z "$shell" ]; then
+  shell="$(basename "$SHELL")"
+fi
+
+if [ -z "$print" ]; then
+  case "$shell" in
+    bash )
+      profile='~/.bash_profile'
+      ;;
+    zsh )
+      profile='~/.zshrc'
+      ;;
+    ksh )
+      profile='~/.profile'
+      ;;
+    csh )
+      profile='~/.cshrc'
+      ;;
+    tcsh )
+      profile='~/.tcshrc'
+      ;;
+    * )
+      profile='your profile'
+      ;;
+  esac
+
+  { echo "# Load tmuxifier automatically by adding"
+    echo "# the following to ${profile}:"
+    echo
+    echo "eval \"\$(tmuxifier init -)\""
+    echo
+  } >&2
+
+  exit 1
+fi
+
+case "$shell" in
+  csh | tcsh )
+    echo "setenv TMUXIFIER \"$TMUXIFIER\""
+    echo "source \"\$TMUXIFIER/init.tcsh\""
+    ;;
+  * )
+    echo "export TMUXIFIER=\"$TMUXIFIER\""
+    echo "source \"\$TMUXIFIER/init.sh\""
+    ;;
+esac
