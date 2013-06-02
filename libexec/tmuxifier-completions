@@ -2,6 +2,14 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier completion <command>
+
+Print a list of available completions for specified command."
+  exit
+fi
+
 # Provide tmuxifier completions
 if [ "$1" == "--complete" ]; then
   tmuxifier-commands
@@ -9,7 +17,7 @@ if [ "$1" == "--complete" ]; then
 fi
 
 has-completions() {
-  grep -i "^# provide tmuxifier completions" "$1" >/dev/null
+  grep -i "^# Provide tmuxifier completions" "$1" >/dev/null
 }
 
 command="$1"

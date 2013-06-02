@@ -2,6 +2,16 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier edit-session <layout_name>
+
+Aliases: edit-ses, es
+
+Open specified session layout for editing in \$EDITOR."
+  exit
+fi
+
 # Provide tmuxifier completions
 if [ "$1" == "--complete" ]; then
   for item in $(tmuxifier-list-sessions); do

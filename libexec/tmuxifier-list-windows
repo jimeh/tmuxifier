@@ -2,6 +2,16 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier list-windows
+
+Aliases: list-win, lsw
+
+List all window layouts."
+  exit
+fi
+
 list=$(find -L "$TMUXIFIER_LAYOUT_PATH" -name "*.window.sh")
 for file in $list; do
   file=${file/$TMUXIFIER_LAYOUT_PATH\//}

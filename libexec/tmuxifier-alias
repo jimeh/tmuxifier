@@ -2,6 +2,14 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier alias <alias>
+
+Resolve a command alias to it's full name."
+  exit
+fi
+
 case "$1" in
   "session" | "ses" | "s" )
     echo "load-session"

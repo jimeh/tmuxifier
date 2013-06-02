@@ -2,6 +2,16 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier list
+
+Aliases: ls
+
+List all available session and window layouts."
+  exit
+fi
+
 echo ""
 echo "Sessions:"
 tmuxifier-list-sessions

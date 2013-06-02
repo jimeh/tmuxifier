@@ -2,25 +2,25 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  tmuxifier-help
+  exit
+fi
+
 # Provide tmuxifier completions
 if [ "$1" == "--complete" ]; then
   tmuxifier-commands
   exit
 fi
 
+has-help() {
+  grep -i "^# Provide tmuxifier help" "$1" >/dev/null
+}
+
 command="$1"
-
-# Ensure we have the correct command name in case an alias was given.
-if [ -n "$command" ]; then
-  ! resolved="$(tmuxifier-alias "$command")"
-  if [ -n "$resolved" ]; then
-    command="$resolved"
-  fi
-fi
-
-case "$command" in
-  "" )
-    echo "usage: tmuxifier <command> [<args>]
+if [ -z "$command" ]; then
+  echo "usage: tmuxifier <command> [<args>]
 
 Some useful tmuxifier commands are:
    <command>      <alias>
@@ -38,87 +38,23 @@ Some useful tmuxifier commands are:
    help                    Show this message.
 
 See 'tmuxifier help <command>' for information on a specific command."
-    ;;
-  "load-session" )
-    echo "usage: tmuxifier load-session <layout_name>
+  exit
+fi
 
-Aliases: session, ses, s
+! command_path="$(tmuxifier-resolve-command-path "$command")"
 
-Create a session using the session layout, unless the session already exists
-in which case, we simply switch to the existing one."
-    ;;
-  "load-window" )
-    echo "usage: tmuxifier load-window <layout_name>
+if [ -z "$command_path" ]; then
+  echo "tmuxifier: no such command '$command'" >&2
+  exit 1
+fi
 
-Aliases: window, win, w
-
-Create a new window using the specified window layout in the current session."
-    ;;
-  "new-session" )
-    echo "usage: tmuxifier new-session <layout_name>
-
-Aliases: new-ses, ns
-
-Create a new session layout and open it for editing in \$EDITOR."
-    ;;
-  "new-window" )
-    echo "usage: tmuxifier new-window <layout_name>
-
-Aliases: new-win, ws
-
-Create a new window layout and open it for editing in \$EDITOR."
-    ;;
-  "edit-session" )
-    echo "usage: tmuxifier edit-session <layout_name>
-
-Aliases: edit-ses, es
-
-Open specified session layout for editing in \$EDITOR."
-    ;;
-  "edit-window" )
-    echo "usage: tmuxifier edit-window <layout_name>
-
-Aliases: edit-win, ew
-
-Open specified window layout for editing in \$EDITOR."
-    ;;
-  "completions" )
-    echo "usage: tmuxifier completion <command>
-
-Print a list of available completions for specified command."
-    ;;
-  "list" )
-    echo "usage: tmuxifier list
-
-Aliases: ls
-
-List all available session and window layouts."
-    ;;
-  "list-sessions" )
-    echo "usage: tmuxifier list-sessions
-
-Aliases: list-ses, lss
-
-List all session layouts."
-    ;;
-  "list-windows" )
-    echo "usage: tmuxifier list-windows
-
-Aliases: list-win, lsw
-
-List all window layouts."
-    ;;
-  * )
-    ! command_path="$(tmuxifier-resolve-command-path "$command")"
-    if [ -n "$command_path" ]; then
-      echo "Sorry, the '$command' command isn't documented yet."
-      echo
-      echo "You can view the command's source here:"
-      echo "$command_path"
-      echo
-    else
-      echo "tmuxifier: no such command '$command'" >&2
-      exit 1
-    fi
-    ;;
-esac
+if has-help "$command_path"; then
+  shift
+  exec "$command_path" --help "$@"
+else
+  echo "Sorry, the '$command' command isn't documented yet."
+  echo ""
+  echo "You can view the command's source here:"
+  echo "$command_path"
+  echo ""
+fi

@@ -2,6 +2,15 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier commands
+
+List all available commands, includes internal commands not intended for
+normal use by users."
+  exit
+fi
+
 shopt -s nullglob
 
 { for path in ${PATH//:/$'\n'}; do
