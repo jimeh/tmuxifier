@@ -45,15 +45,8 @@ You might also need to add Tmuxifier's bin directory to your PATH."
   exit
 fi
 
-print=""
-for args in "$@"; do
-  if [ "$args" = "-" ]; then
-    print=1
-    shift
-  fi
-done
-
-if [ -z "$print" ]; then
+# Print help if "-" argument is not given
+if [[ " $@ " != *" - "* ]]; then
   echo "$(tmuxifier-help init $@)" >&2
   exit 1
 fi
