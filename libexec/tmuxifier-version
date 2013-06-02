@@ -2,4 +2,12 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
-echo "0.4.1"
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier version
+
+Outputs Tmuxifier version."
+  exit
+fi
+
+echo "0.6.0"

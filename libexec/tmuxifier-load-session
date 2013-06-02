@@ -2,6 +2,17 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier load-session <layout_name>
+
+Aliases: session, ses, s
+
+Create a session using the session layout, unless the session already exists
+in which case, we simply attach/switch to the existing one."
+  exit
+fi
+
 # Provide tmuxifier completions
 if [ "$1" == "--complete" ]; then
   for item in $(tmuxifier-list-sessions); do
@@ -16,11 +27,7 @@ if [ -z "$1" ]; then
 fi
 
 # Load runtime functions.
-source "$TMUXIFIER/runtime.sh"
+source "$TMUXIFIER/lib/runtime.sh"
 
-if [ ! -z $TMUX ]; then
-  load_session "$1"
-else
-  echo "tmuxifier: 'load-session' command can only be used from within Tmux."
-  exit 1
-fi
+# Load session file.
+load_session "$1"

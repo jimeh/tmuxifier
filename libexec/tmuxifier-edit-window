@@ -2,6 +2,16 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier edit-window <layout_name>
+
+Aliases: edit-win, ewin, ew
+
+Open specified window layout for editing in \$EDITOR."
+  exit
+fi
+
 # Provide tmuxifier completions
 if [ "$1" == "--complete" ]; then
   for item in $(tmuxifier-list-windows); do

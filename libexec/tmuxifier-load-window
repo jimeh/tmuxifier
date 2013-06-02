@@ -2,6 +2,16 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier load-window <layout_name>
+
+Aliases: window, win, w
+
+Create a new window using the specified window layout in the current session."
+  exit
+fi
+
 # Provide tmuxifier completions
 if [ "$1" == "--complete" ]; then
   for item in $(tmuxifier-list-windows); do
@@ -16,7 +26,7 @@ if [ -z "$1" ]; then
 fi
 
 # Load runtime functions.
-source "$TMUXIFIER/runtime.sh"
+source "$TMUXIFIER/lib/runtime.sh"
 
 if [ ! -z $TMUX ]; then
   session="$(tmuxifier-current-session)"

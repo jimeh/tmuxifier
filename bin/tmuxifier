@@ -27,7 +27,7 @@ else
 fi
 
 # Load tmuxifier environment variables.
-source "$TMUXIFIER/env.sh"
+source "$TMUXIFIER/lib/env.sh"
 
 export PATH="$TMUXIFIER/libexec:$PATH"
 

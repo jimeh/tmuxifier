@@ -2,6 +2,14 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if [ "$1" == "--help" ]; then
+  echo "usage: tmuxifier alias <alias>
+
+Resolve a command alias to it's full name."
+  exit
+fi
+
 case "$1" in
   "session" | "ses" | "s" )
     echo "load-session"
@@ -9,25 +17,25 @@ case "$1" in
   "window" | "win" | "w" )
     echo "load-window"
     ;;
-  "new-ses" | "ns" )
+  "new-ses" | "nses" | "ns" )
     echo "new-session"
     ;;
-  "new-win" | "nw" )
+  "new-win" | "nwin" | "nw" )
     echo "new-window"
     ;;
-  "edit-ses" | "es" )
+  "edit-ses" | "eses" | "es" )
     echo "edit-session"
     ;;
-  "edit-win" | "ew" )
+  "edit-win" | "ewin" | "ew" )
     echo "edit-window"
     ;;
-  "ls" )
+  "l" )
     echo "list"
     ;;
-  "list-ses" | "lss" )
+  "list-ses" | "lses" | "ls" )
     echo "list-sessions"
     ;;
-  "list-win" | "lsw" )
+  "list-win" | "lwin" | "lw" )
     echo "list-windows"
     ;;
   * )

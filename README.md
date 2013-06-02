@@ -151,7 +151,7 @@ export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
 
 ### Disable Shell-Completion
 
-Tmuxifier comes with shell-completion for bash and zsh. If for any
+Tmuxifier comes with shell-completion for bash, zsh and tcsh. If for any
 reason you need to disable it, just set `$TMUXIFIER_NO_COMPLETE`.
 
 ```bash
@@ -167,7 +167,7 @@ export TMUXIFIER_NO_COMPLETE=1
 ## Tmuxifier vs. Tmuxinator
 
 Though Tmuxifier is largely inspired by the excellent [Tmuxinator][] project,
-but does set itself apart in a number of ways:
+it does set itself apart in a number of ways:
 
 - Uses shell scripts to define Tmux sessions and windows instead of YAML
   files. The benefit is total control over Tmux, but the definition files are
@@ -200,7 +200,7 @@ But if that doesn't put you off, please enjoy Tmuxifier :)
 
 (The MIT license)
 
-Copyright (c) 2012 Jim Myhrberg.
+Copyright (c) 2013 Jim Myhrberg.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
