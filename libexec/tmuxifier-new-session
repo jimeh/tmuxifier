@@ -2,8 +2,11 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
 # Provide tmuxifier help
-if [ "$1" == "--help" ]; then
+if calling-help "$@"; then
   echo "usage: tmuxifier new-session <layout_name>
 
 Aliases: new-ses, nses, ns
@@ -13,7 +16,7 @@ Create a new session layout and open it for editing in \$EDITOR."
 fi
 
 # Provide tmuxifier completions
-if [ "$1" == "--complete" ]; then
+if calling-complete "$@"; then
   for item in $(tmuxifier-list-sessions); do
     echo "$item"
   done

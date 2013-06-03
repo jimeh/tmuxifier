@@ -2,14 +2,17 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
 # Provide tmuxifier help
-if [ "$1" == "--help" ]; then
+if calling-help "$@"; then
   tmuxifier-help
   exit
 fi
 
 # Provide tmuxifier completions
-if [ "$1" == "--complete" ]; then
+if calling-complete "$@"; then
   tmuxifier-commands
   exit
 fi
