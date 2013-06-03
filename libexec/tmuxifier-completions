@@ -2,8 +2,11 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
 # Provide tmuxifier help
-if [ "$1" == "--help" ]; then
+if calling-help "$@"; then
   echo "usage: tmuxifier completion <command>
 
 Print a list of available completions for specified command."
@@ -11,7 +14,7 @@ Print a list of available completions for specified command."
 fi
 
 # Provide tmuxifier completions
-if [ "$1" == "--complete" ]; then
+if calling-complete "$@"; then
   tmuxifier-commands
   exit
 fi
@@ -21,7 +24,7 @@ has-completions() {
 }
 
 if [ -z "$1" ]; then
-  echo "$(tmuxifier-help completions)" >&2
+  echo "$(tmuxifier-help completions $@)" >&2
   exit 1
 fi
 

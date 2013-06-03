@@ -2,14 +2,17 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
 # Provide tmuxifier help
-if [ "$1" == "--help" ]; then
+if calling-help "$@"; then
   tmuxifier-help
   exit
 fi
 
 # Provide tmuxifier completions
-if [ "$1" == "--complete" ]; then
+if calling-complete "$@"; then
   tmuxifier-commands
   exit
 fi
@@ -18,7 +21,6 @@ has-help() {
   grep -i "^# Provide tmuxifier help" "$1" >/dev/null
 }
 
-command="$1"
 if [ -z "$1" ]; then
   echo "usage: tmuxifier <command> [<args>]
 
@@ -50,7 +52,7 @@ fi
 
 if has-help "$command_path"; then
   shift
-  exec "$command_path" --help "$@"
+  exec "$command_path" "$@" --help
 else
   command="$(basename "$command_path")"
   command="${command/tmuxifier\-/}"

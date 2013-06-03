@@ -2,8 +2,11 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
 # Provide tmuxifier help
-if [ "$1" == "--help" ]; then
+if calling-help "$@"; then
   echo "usage: tmuxifier load-session <layout_name>
 
 Aliases: session, ses, s
@@ -14,15 +17,13 @@ in which case, we simply attach/switch to the existing one."
 fi
 
 # Provide tmuxifier completions
-if [ "$1" == "--complete" ]; then
-  for item in $(tmuxifier-list-sessions); do
-    echo "$item"
-  done
+if calling-complete "$@"; then
+  tmuxifier-list-sessions
   exit
 fi
 
 if [ -z "$1" ]; then
-  echo "$(tmuxifier-help load-session)" >&2
+  echo "$(tmuxifier-help load-session $@)" >&2
   exit 1
 fi
 
