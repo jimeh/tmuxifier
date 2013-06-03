@@ -21,7 +21,6 @@ has-help() {
   grep -i "^# Provide tmuxifier help" "$1" >/dev/null
 }
 
-command="$1"
 if [ -z "$1" ]; then
   echo "usage: tmuxifier <command> [<args>]
 
