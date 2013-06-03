@@ -17,9 +17,7 @@ fi
 
 # Provide tmuxifier completions
 if calling-complete "$@"; then
-  for item in $(tmuxifier-list-windows); do
-    echo "$item"
-  done
+  tmuxifier-list-windows
   exit
 fi
 
