@@ -24,7 +24,7 @@ has-completions() {
 }
 
 if [ -z "$1" ]; then
-  echo "$(tmuxifier-help completions)" >&2
+  echo "$(tmuxifier-help completions $@)" >&2
   exit 1
 fi
 

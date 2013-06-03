@@ -53,7 +53,7 @@ fi
 
 if has-help "$command_path"; then
   shift
-  exec "$command_path" --help "$@"
+  exec "$command_path" "$@" --help
 else
   command="$(basename "$command_path")"
   command="${command/tmuxifier\-/}"

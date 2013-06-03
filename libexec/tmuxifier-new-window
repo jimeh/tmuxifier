@@ -22,7 +22,7 @@ if calling-complete "$@"; then
 fi
 
 if [ -z "$1" ]; then
-  echo "$(tmuxifier-help new-window)" >&2
+  echo "$(tmuxifier-help new-window $@)" >&2
   exit 1
 fi
 
