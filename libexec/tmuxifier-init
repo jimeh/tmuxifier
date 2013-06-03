@@ -2,11 +2,12 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
-if [ "$1" == "-" ] || [ "$1" == "--help" ]; then
-  shell="$2"
-else
-  shell="$1"
-fi
+# Set shell to first argument that is not "-" or "--help".
+for arg in "$@"; do
+  if [ "$arg" != "-" ] && [ "$arg" != "--help" ]; then
+    shell="$arg"
+  fi
+done
 
 if [ -z "$shell" ]; then
   shell="$(basename "$SHELL")"
