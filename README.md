@@ -1,6 +1,6 @@
 # Tmuxifier
 
-Tmuxify your Tmux. Create, edit, mangage and load complex Tmux session, window
+Tmuxify your Tmux. Create, edit, manage and load complex Tmux session, window
 and pane configurations with ease.
 
 In short, Tmuxifier allows you to easily create, edit, and load "layout"
