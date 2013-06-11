@@ -39,10 +39,20 @@ if [[ " $@ " == *" --help "* ]]; then
   echo "usage: tmuxifier init -
 
 Load Tmuxifier by adding the following to your ${profile}:
+"
 
-    eval \"\$(tmuxifier init -)\"
+  case "$shell" in
+    csh | tcsh )
+      echo "    eval \`tmuxifier init -\`
+"
+      ;;
+    * )
+      echo "    eval \"\$(tmuxifier init -)\"
+"
+      ;;
+  esac
 
-You might also need to add Tmuxifier's bin directory to your PATH."
+  echo "You might also need to add Tmuxifier's bin directory to your PATH."
   exit
 fi
 
