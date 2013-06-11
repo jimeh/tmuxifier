@@ -54,11 +54,11 @@ fi
 
 case "$shell" in
   csh | tcsh )
-    echo "setenv TMUXIFIER \"$TMUXIFIER\""
-    echo "source \"\$TMUXIFIER/init.tcsh\""
+    echo "setenv TMUXIFIER \"$TMUXIFIER\";"
+    echo "source \"\$TMUXIFIER/init.tcsh\";"
     ;;
   * )
-    echo "export TMUXIFIER=\"$TMUXIFIER\""
-    echo "source \"\$TMUXIFIER/init.sh\""
+    echo "export TMUXIFIER=\"$TMUXIFIER\";"
+    echo "source \"\$TMUXIFIER/init.sh\";"
     ;;
 esac
