@@ -1,4 +1,4 @@
-# Set tmuxifier root path.
+# Set/fix Tmuxifier root path if needed.
 if [ -z "${TMUXIFIER}" ]; then
   export TMUXIFIER="${HOME}/.tmuxifier"
 else
@@ -11,7 +11,7 @@ if [[ ":$PATH:" != *":$TMUXIFIER/bin:"* ]]; then
 fi
 
 # If `tmuxifier` is available, and `$TMUXIFIER_NO_COMPLETE` is not set, then
-# load tmuxifier shell completion.
+# load Tmuxifier shell completion.
 if [ -n "$(command -v "tmuxifier")" ] && [ -z "$TMUXIFIER_NO_COMPLETE" ]; then
   if [ -n "$BASH_VERSION" ]; then
     source "$TMUXIFIER/completion/tmuxifier.bash"
