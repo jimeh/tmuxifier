@@ -58,13 +58,29 @@ Clone the repo to your machine:
 git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 ```
 
+Then add `~/.tmuxifier/bin` to your PATH:
+
+### bash & zsh
+
+```bash
+export PATH="~/.tmuxifier/bin:$PATH"
+```
+
+### tcsh
+
+```tcsh
+set path = ( ~/.tmuxifier/bin $path )
+```
+
+## Setup
+
 ### bash & zsh
 
 And add the following to your `~/.profile`, `~/.bash_profile`, `~/.zshrc` or
 equivalent:
 
 ```bash
-[[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"
+eval "$(tmuxifier init -)"
 ```
 
 ### tcsh
@@ -72,9 +88,14 @@ equivalent:
 Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
 
 ```tcsh
-if ( -s "$HOME/.tmuxifier/init.sh" ) then
-  source "$HOME/.tmuxifier/init.sh"
-endif
+eval `tmuxifier init -`
+```
+
+## Updating
+
+```bash
+cd ~/.tmuxifier
+git pull
 ```
 
 ## Usage
