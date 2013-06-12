@@ -60,21 +60,21 @@ git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 
 Then add `~/.tmuxifier/bin` to your PATH:
 
-### bash & zsh
+__In bash & zsh:__
 
 ```bash
 export PATH="~/.tmuxifier/bin:$PATH"
 ```
 
-### tcsh
+__In tcsh:__
 
 ```tcsh
-set path = ( ~/.tmuxifier/bin $path )
+set path = ( "~/.tmuxifier/bin" $path )
 ```
 
 ## Setup
 
-### bash & zsh
+__In bash & zsh:__
 
 And add the following to your `~/.profile`, `~/.bash_profile`, `~/.zshrc` or
 equivalent:
@@ -83,7 +83,7 @@ equivalent:
 eval "$(tmuxifier init -)"
 ```
 
-### tcsh
+__In tcsh:__
 
 Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
 
