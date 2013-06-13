@@ -2,6 +2,18 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier commands
+
+List all available commands, includes internal commands not intended for
+normal use by users."
+  exit
+fi
+
 shopt -s nullglob
 
 { for path in ${PATH//:/$'\n'}; do

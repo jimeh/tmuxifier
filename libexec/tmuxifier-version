@@ -2,4 +2,15 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
-echo "0.4.0"
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier version
+
+Outputs Tmuxifier version."
+  exit
+fi
+
+echo "0.6.1"

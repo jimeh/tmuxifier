@@ -2,6 +2,17 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier resolve-command-path <command_or_alias>
+
+Outputs the absolute path to the given command or command alias."
+  exit
+fi
+
 if [ -n "$1" ]; then
   ! command_path="$(command -v "tmuxifier-$1")"
   if [ -z "$command_path" ]; then

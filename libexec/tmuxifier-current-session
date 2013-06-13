@@ -2,6 +2,17 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier current-session
+
+Outputs the name of the current Tmux session."
+  exit
+fi
+
 if [ -n "$TMUX" ]; then
   for item in $(tmux list-pane -F "#{session_name}");do
     echo $item

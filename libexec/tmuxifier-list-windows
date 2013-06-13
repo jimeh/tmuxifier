@@ -2,8 +2,21 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
-list=$(find "$TMUXIFIER_LAYOUT_PATH/" -name "*.window.sh")
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier list-windows
+
+Aliases: list-win, lwin, lw
+
+List all window layouts."
+  exit
+fi
+
+list=$(find -L "$TMUXIFIER_LAYOUT_PATH" -name "*.window.sh")
 for file in $list; do
   file=${file/$TMUXIFIER_LAYOUT_PATH\//}
-  echo "  ${file/.window.sh/}"
+  echo "${file/.window.sh/}"
 done

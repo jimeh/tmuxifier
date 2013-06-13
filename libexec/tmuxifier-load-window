@@ -2,21 +2,32 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier load-window <layout_name>
+
+Aliases: window, win, w
+
+Create a new window using the specified window layout in the current session."
+  exit
+fi
+
 # Provide tmuxifier completions
-if [ "$1" == "--complete" ]; then
-  for item in $(tmuxifier-list-windows); do
-    echo "$item"
-  done
+if calling-complete "$@"; then
+  tmuxifier-list-windows
   exit
 fi
 
 if [ -z "$1" ]; then
-  echo "$(tmuxifier-help load-window)" >&2
+  echo "$(tmuxifier-help load-window $@)" >&2
   exit 1
 fi
 
 # Load runtime functions.
-source "$TMUXIFIER/runtime.sh"
+source "$TMUXIFIER/lib/runtime.sh"
 
 if [ ! -z $TMUX ]; then
   session="$(tmuxifier-current-session)"

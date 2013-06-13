@@ -187,9 +187,6 @@ initialize_session() {
     local first_window_index=$(__get_first_window_index)
     tmux move-window -s "$session:$first_window_index" -t "$session:999"
 
-    # Ensure correct pane splitting.
-    __go_to_session
-
     # Session created, return ok exit status.
     return 0
   fi
