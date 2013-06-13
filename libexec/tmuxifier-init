@@ -1,0 +1,74 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+# Set shell to first argument that is not "-", "-h" or "--help".
+for arg in "$@"; do
+  if [ "$arg" != "-" ] &&[ "$arg" != "-h" ] && [ "$arg" != "--help" ]; then
+    shell="$arg"
+  fi
+done
+
+if [ -z "$shell" ]; then
+  shell="$(basename "$SHELL")"
+fi
+
+case "$shell" in
+  bash )
+    profile='~/.bash_profile'
+    ;;
+  zsh )
+    profile='~/.zshrc'
+    ;;
+  ksh )
+    profile='~/.profile'
+    ;;
+  csh )
+    profile='~/.cshrc'
+    ;;
+  tcsh )
+    profile='~/.tcshrc'
+    ;;
+  * )
+    profile='shell init file'
+    ;;
+esac
+
+# Provide tmuxifier help
+if [[ " $@ " == *" --help "* ]]; then
+  echo "usage: tmuxifier init -
+
+Load Tmuxifier by adding the following to your ${profile}:
+"
+
+  case "$shell" in
+    csh | tcsh )
+      echo "    eval \`tmuxifier init -\`
+"
+      ;;
+    * )
+      echo "    eval \"\$(tmuxifier init -)\"
+"
+      ;;
+  esac
+
+  echo "You might also need to add Tmuxifier's bin directory to your PATH."
+  exit
+fi
+
+# Print help if "-" argument is not given
+if [[ " $@ " != *" - "* ]]; then
+  echo "$(tmuxifier-help init $@)" >&2
+  exit 1
+fi
+
+case "$shell" in
+  csh | tcsh )
+    echo "setenv TMUXIFIER \"$TMUXIFIER\";"
+    echo "source \"\$TMUXIFIER/init.tcsh\";"
+    ;;
+  * )
+    echo "export TMUXIFIER=\"$TMUXIFIER\";"
+    echo "source \"\$TMUXIFIER/init.sh\";"
+    ;;
+esac
