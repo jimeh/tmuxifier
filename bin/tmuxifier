@@ -2,8 +2,26 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+resolve_link() {
+  $(type -p greadlink readlink | head -1) $1
+}
+
+abs_dirname() {
+  local cwd="$(pwd)"
+  local path="$1"
+
+  while [ -n "$path" ]; do
+    cd "${path%/*}"
+    local name="${path##*/}"
+    path="$(resolve_link "$name" || true)"
+  done
+
+  pwd
+  cd "$cwd"
+}
+
 if [ -z "${TMUXIFIER}" ]; then
-  export TMUXIFIER="${HOME}/.tmuxifier"
+  export TMUXIFIER="$(dirname "$(abs_dirname "$0")")"
 else
   export TMUXIFIER="${TMUXIFIER%/}"
 fi

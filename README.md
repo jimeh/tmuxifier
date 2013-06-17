@@ -58,23 +58,51 @@ Clone the repo to your machine:
 git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 ```
 
-### bash & zsh
+Then add `~/.tmuxifier/bin` to your PATH to make the `tmuxifier` executable
+available to you:
+
+__In bash & zsh:__
+
+```bash
+export PATH="~/.tmuxifier/bin:$PATH"
+```
+
+__In tcsh:__
+
+```tcsh
+set path = ( "~/.tmuxifier/bin" $path )
+```
+
+### Custom Installation Path
+
+To install Tmuxifier somewhere else than the suggested `~/.tmuxifier`, simply
+clone the repository to your custom location, and ensure the `bin` folder is
+added to your PATH making the `tmuxifier` executable available to you.
+
+## Setup
+
+__In bash & zsh:__
 
 And add the following to your `~/.profile`, `~/.bash_profile`, `~/.zshrc` or
 equivalent:
 
 ```bash
-[[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"
+eval "$(tmuxifier init -)"
 ```
 
-### tcsh
+__In tcsh:__
 
 Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
 
 ```tcsh
-if ( -s "$HOME/.tmuxifier/init.sh" ) then
-  source "$HOME/.tmuxifier/init.sh"
-endif
+eval `tmuxifier init -`
+```
+
+## Updating
+
+```bash
+cd ~/.tmuxifier
+git pull
 ```
 
 ## Usage
@@ -128,17 +156,6 @@ in it.
 [examples]: https://github.com/jimeh/tmuxifier/tree/master/examples
 
 ## Configure & Customize
-
-### Custom Installaton Path
-
-To install Tmuxifier to a custom path, clone the repository to your desired
-path and set `$TMUXIFIER` to that path, additionally loading `init.sh` or
-`init.tcsh` from that same path.
-
-```bash
-export TMUXIFIER="$HOME/.dotfiles/tmuxifier"
-[[ -s "$TMUXIFIER/init.sh" ]] && source "$TMUXIFIER/init.sh"
-```
 
 ### Custom Layouts Path
 
