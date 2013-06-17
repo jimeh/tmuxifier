@@ -13,4 +13,4 @@ Outputs Tmuxifier version."
   exit
 fi
 
-echo "0.6.1"
+echo "0.7.0"
