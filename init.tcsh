@@ -4,7 +4,7 @@ if ( ! $?TMUXIFIER ) then
 endif
 
 # Add `bin` directroy to `$path` if needed.
-if ( " $path " =~ "* $TMUXIFIER/bin *" ) then
+if ( ! (" $path " =~ "* $TMUXIFIER/bin *" ) ) then
   set path = ( $TMUXIFIER/bin $path )
 endif
 
