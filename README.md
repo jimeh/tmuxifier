@@ -42,9 +42,7 @@ select_pane 0
 You can then load that window layout into a new window in the
 current tmux session using:
 
-```bash
-tmuxifier load-window example
-```
+    tmuxifier load-window example
 
 Which will yield a Tmux window looking like this:
 
@@ -54,9 +52,7 @@ Which will yield a Tmux window looking like this:
 
 Clone the repo to your machine:
 
-```bash
-git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
-```
+    git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 
 Then add `~/.tmuxifier/bin` to your PATH to make the `tmuxifier` executable
 available to you:
@@ -100,10 +96,8 @@ eval `tmuxifier init -`
 
 ## Updating
 
-```bash
-cd ~/.tmuxifier
-git pull
-```
+    cd ~/.tmuxifier
+    git pull
 
 ## Usage
 
