@@ -193,14 +193,6 @@ it does set itself apart in a number of ways:
 [tmuxinator]: https://github.com/aziz/tmuxinator
 [rbenv]: https://github.com/sstephenson/rbenv
 
-## Heed My Warning
-
-Tmuxifier is pretty much an alpha product hacked together over a weekend at
-this point. Documentation is sketchy at best, and things might drastically
-change and/or break.
-
-But if that doesn't put you off, please enjoy Tmuxifier :)
-
 ## Todos
 
 * Improve Readme, specially Usage section.
