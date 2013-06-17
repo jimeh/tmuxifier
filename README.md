@@ -196,8 +196,7 @@ it does set itself apart in a number of ways:
 ## Todos
 
 * Improve Readme, specially Usage section.
-* Expand `help` command with details for most commands, rather than just the
-  essential ones.
+* Write up a detailed reference for all available layout helper functions.
 
 ## License
 
