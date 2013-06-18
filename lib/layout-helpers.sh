@@ -84,7 +84,7 @@ run_cmd() {
   send_keys "C-m" "$2"
 }
 
-# Cusomize session root path. Default is `$HOME`.
+# Customize session root path. Default is `$HOME`.
 #
 # Arguments:
 #   - $1: Directory path to use for session root.
@@ -138,6 +138,7 @@ load_session() {
   local file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
   if [ -f "$file" ]; then
     session="$1"
+    set_default_path=true
     source "$file"
     session=
 
@@ -178,7 +179,8 @@ initialize_session() {
     # Set default-path for session
     if [ -n "$session_root" ] && [ -d "$session_root" ]; then
       cd "$session_root"
-      tmux set-option -t "$session:" default-path "$session_root" 1>/dev/null
+
+      $set_default_path && tmux set-option -t "$session:" default-path "$session_root" 1>/dev/null
     fi
 
     # In order to ensure only specified windows are created, we move the
