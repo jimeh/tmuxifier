@@ -84,7 +84,7 @@ run_cmd() {
   send_keys "C-m" "$2"
 }
 
-# Cusomize session root path. Default is `$HOME`.
+# Customize session root path. Default is `$HOME`.
 #
 # Arguments:
 #   - $1: Directory path to use for session root.
