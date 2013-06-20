@@ -45,6 +45,38 @@ split_h() {
   __go_to_window_or_session_path
 }
 
+# Split current window/pane vertically by line count.
+#
+# Arguments:
+#   - $1: (optional) Number of lines the new pane will use.
+#   - $2: (optional) Target pane ID to split in current window.
+#
+split_vl() {
+  if [ -n "$1" ]; then local count=(-l "$1"); fi
+  tmux split-window -t "$session:$window.$2" -v "${count[@]}"
+  __go_to_window_or_session_path
+}
+
+# Split current window/pane horizontally by column count.
+#
+# Arguments:
+#   - $1: (optional) Number of columns the new pane will use.
+#   - $2: (optional) Target pane ID to split in current window.
+#
+split_hl() {
+  if [ -n "$1" ]; then local count=(-l "$1"); fi
+  tmux split-window -t "$session:$window.$2" -h "${count[@]}"
+  __go_to_window_or_session_path
+}
+
+#run clock mode
+#
+# Arguments:  
+#   - $1: (optional) Target pane ID in which to run
+
+clock() {
+	tmux clock-mode -t "$session:$window.$1"
+}
 # Select a specific window.
 #
 # Arguments:
