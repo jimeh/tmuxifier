@@ -69,14 +69,14 @@ split_hl() {
   __go_to_window_or_session_path
 }
 
-#run clock mode
+# Run clock mode.
 #
-# Arguments:  
+# Arguments:
 #   - $1: (optional) Target pane ID in which to run
-
 clock() {
-	tmux clock-mode -t "$session:$window.$1"
+  tmux clock-mode -t "$session:$window.$1"
 }
+
 # Select a specific window.
 #
 # Arguments:
