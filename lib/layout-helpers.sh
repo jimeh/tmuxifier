@@ -144,11 +144,16 @@ window_root() {
 #
 # Arguments:
 #   - $1: Name of window layout to load.
+#   - $2: Override default window name.
 #
 load_window() {
   local file="$TMUXIFIER_LAYOUT_PATH/$1.window.sh"
   if [ -f "$file" ]; then
-    window="$1"
+    if [ $# -gt 1 ]; then
+      window="$2"
+    else
+      window="$1"
+    fi
     source "$file"
     window=
 
