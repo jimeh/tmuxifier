@@ -4,7 +4,7 @@ set -e
 
 # Set shell to first argument that is not "-", "-h" or "--help".
 for arg in "$@"; do
-  if [ "$arg" != "-" ] &&[ "$arg" != "-h" ] && [ "$arg" != "--help" ]; then
+  if [ "$arg" != "-" ] && [ "$arg" != "-h" ] && [ "$arg" != "--help" ]; then
     shell="$arg"
   fi
 done
