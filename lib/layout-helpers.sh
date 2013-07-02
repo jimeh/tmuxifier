@@ -143,16 +143,21 @@ window_root() {
 # Load specified window layout.
 #
 # Arguments:
-#   - $1: Name of window layout to load.
-#   - $2: Override default window name.
+#   - $1: Name of or file path to window layout to load.
+#   - $2: (optional) Override default window name.
 #
 load_window() {
-  local file="$TMUXIFIER_LAYOUT_PATH/$1.window.sh"
+  local file="$1"
+  if [ ! -f "$file" ]; then
+    file="$TMUXIFIER_LAYOUT_PATH/$1.window.sh"
+  fi
+
   if [ -f "$file" ]; then
     if [ $# -gt 1 ]; then
       window="$2"
     else
-      window="$1"
+      window="${1/%.window.sh}"
+      window="${window/%.sh}"
     fi
     source "$file"
     window=
@@ -162,19 +167,31 @@ load_window() {
       window_root "$session_root"
     fi
   else
-    echo "No such window layout found '$1' in '$TMUXIFIER_LAYOUT_PATH'."
+    echo "\"$1\" window layout not found." >&2
+    return 1
   fi
 }
 
 # Load specified session layout.
 #
 # Arguments:
-#   - $1: Name of session layout to load.
+#   - $1: Name of or file path to session layout to load.
+#   - $2: (optional) Override default window name.
 #
 load_session() {
-  local file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
+  local file="$1"
+  if [ ! -f "$file" ]; then
+    file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
+  fi
+
   if [ -f "$file" ]; then
-    session="$1"
+    if [ $# -gt 1 ]; then
+      session="$2"
+    else
+      session="${1/%.session.sh}"
+      session="${session/%.sh}"
+    fi
+
     set_default_path=true
     source "$file"
     session=
@@ -184,7 +201,8 @@ load_session() {
       session_root="$HOME"
     fi
   else
-    echo "No such session layout found '$1' in '$TMUXIFIER_LAYOUT_PATH'."
+    echo "\"$1\" session layout not found." >&2
+    return 1
   fi
 }
 

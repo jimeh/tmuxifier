@@ -7,7 +7,7 @@ source "$TMUXIFIER/lib/util.sh"
 
 # Provide tmuxifier help
 if calling-help "$@"; then
-  echo "usage: tmuxifier load-session <layout_name>
+  echo "usage: tmuxifier load-session <layout_name | file_path>
 
 Aliases: session, ses, s
 
