@@ -22,14 +22,25 @@ new_window() {
 }
 
 # Rename the chosen window.
+# Has to be called from a layout.session.sh file.
 #
 # Arguments:
 #   - $1: Window to be renamed
 #   - $2: New name to the chosen window
-#   - $3: (optional) Seconds to delay the renaming
-rename_window() {
-  if [ -z "$3" ]; then local seconds=5; fi
-  ( sleep "$seconds" 2>/dev/null; tmux rename-window -t "$session:$1" "$2" ) &
+#   - $3: (optional) Seconds to delay the renaming (default 3)
+rename_window_from_session() {
+  __rename_window $1 $2 $3
+}
+
+# Rename the chosen window.
+# Has to be called from a layout.window.sh file.
+#
+# Arguments:
+#   - $1: New name to the chosen window
+#   - $2: (optional) Seconds to delay the renaming (default 3)
+rename_window_from_window() {
+  __get_active_window_id
+  __rename_window $_window_id $1 $2
 }
 
 # Split current window/pane vertically.
@@ -319,4 +330,22 @@ __go_to_window_or_session_path() {
     run_cmd "cd \"$window_or_session_root\""
     run_cmd "clear"
   fi
+}
+
+__get_active_window_id() {
+  _window_id=$( tmux list-windows | grep active | grep -o "^[0-9]*" )
+}
+
+# Abstraction to rename the window.
+#
+# Arguments:
+#   - $1: Window to be renamed
+#   - $2: New name to the chosen window
+#   - $3: (optional) Seconds to delay the renaming (default 3)
+__rename_window() {
+  local delay=$3
+  if [ -z "$3" ]; then delay=3; fi
+
+  ( sleep "$delay" 2>/dev/null; tmux rename-window -t $1 $2 ) &
+  unset _window_id
 }
