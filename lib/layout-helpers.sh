@@ -21,6 +21,17 @@ new_window() {
   __go_to_window_or_session_path
 }
 
+# Rename the chosen window.
+#
+# Arguments:
+#   - $1: Window to be renamed
+#   - $2: New name to the chosen window
+#   - $3: (optional) Seconds to delay the renaming
+rename_window() {
+  if [ -z "$3" ]; then local seconds=5; fi
+  ( sleep "$seconds" 2>/dev/null; tmux rename-window -t "$session:$1" "$2" ) &
+}
+
 # Split current window/pane vertically.
 #
 # Arguments:
