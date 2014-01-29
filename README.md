@@ -94,6 +94,14 @@ Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
 eval `tmuxifier init -`
 ```
 
+If you need to pass custom arguments to tmux itself, you can do so by setting
+the `TMUXIFIER_TMUX_OPTS` environment variable. For example:
+
+```bash
+export TMUXIFIER_TMUX_OPTS="-L my-awesome-socket-name"
+eval "$(tmuxifier init -)"
+```
+
 ## Updating
 
     cd ~/.tmuxifier
