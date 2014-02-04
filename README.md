@@ -54,13 +54,13 @@ Clone the repo to your machine:
 
     git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 
-Then add `~/.tmuxifier/bin` to your PATH to make the `tmuxifier` executable
+Then add `$HOME/.tmuxifier/bin` to your PATH to make the `tmuxifier` executable
 available to you:
 
 __In bash & zsh:__
 
 ```bash
-export PATH="./.tmuxifier/bin:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$PATH"
 ```
 
 __In tcsh:__
