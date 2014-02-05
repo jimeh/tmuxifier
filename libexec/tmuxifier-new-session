@@ -27,8 +27,20 @@ if [ -z "$1" ]; then
 fi
 
 layout_name="$1"
+session_path="$TMUXIFIER_SESSION_BASE_PATH/${layout_name}"
 layout_file="$TMUXIFIER_LAYOUT_PATH/${layout_name}.session.sh"
 template="$TMUXIFIER/templates/session.sh"
+
+if [ $# -eq 2 ]; then
+  if [ "$2" == "." ]; then
+    session_path="$(pwd)"
+  else
+    session_path=$2
+  fi
+fi
+
+# Attempt to make session_path relative to users home directory
+session_path=${session_path//$HOME/"~"}
 
 if [ ! -f "$template" ]; then
   echo "tmuxifier: session layout template not found: $template" >&2
@@ -44,6 +56,7 @@ if [ -f "$layout_file" ]; then
 fi
 
 content="$(cat "$template")"
+content="${content//\{\{SESSION_PATH\}\}/$session_path}"
 echo "${content//\{\{SESSION_NAME\}\}/$layout_name}" > "$layout_file"
 
 if [ -n "$EDITOR" ]; then
