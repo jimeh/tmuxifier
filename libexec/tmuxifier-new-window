@@ -28,7 +28,7 @@ fi
 
 layout_name="$1"
 layout_file="$TMUXIFIER_LAYOUT_PATH/${layout_name}.window.sh"
-template="$TMUXIFIER_TEMPLATE_PATH/window.sh"
+template="$TMUXIFIER_TEMPLATE_PATH/$TMUXIFIER_WINDOW_TEMPLATE_NAME.sh"
 
 if [ ! -f "$template" ]; then
   echo "tmuxifier: window layout template not found: $template" >&2

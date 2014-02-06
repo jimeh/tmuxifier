@@ -18,3 +18,17 @@ if [ -z "${TMUXIFIER_TEMPLATE_PATH}" ]; then
 else
   export TMUXIFIER_TEMPLATE_PATH="${TMUXIFIER_TEMPLATE_PATH%/}"
 fi
+
+# Setup session template name.
+if [ -z "${TMUXIFIER_SESSION_TEMPLATE_NAME}" ]; then
+  export TMUXIFIER_SESSION_TEMPLATE_NAME="session"
+else
+  export TMUXIFIER_SESSION_TEMPLATE_NAME="${TMUXIFIER_SESSION_TEMPLATE_NAME%.sh}"
+fi
+
+# Setup window template name.
+if [ -z "${TMUXIFIER_WINDOW_TEMPLATE_NAME}" ]; then
+  export TMUXIFIER_WINDOW_TEMPLATE_NAME="window"
+else
+  export TMUXIFIER_WINDOW_TEMPLATE_NAME="${TMUXIFIER_WINDOW_TEMPLATE_NAME%.sh}"
+fi

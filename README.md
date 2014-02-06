@@ -197,6 +197,15 @@ You can customize the template directory used by Tmuxifier by setting
 
 ```bash
 export TMUXIFIER_TEMPLATE_PATH="$HOME/.tmuxinator-templates"
+export TMUXIFIER_SESSION_TEMPLATE_NAME="awesome-session"
+export TMUXIFIER_WINDOW_TEMPLATE_NAME="awesome-window"
+```
+
+or for special cases
+
+```
+TMUXIFIER_SESSION_TEMPLATE_NAME=awesome-session tmuxifier new-window wilder
+TMUXIFIER_WINDOW_TEMPLATE_NAME=awesome-window tmuxifier new-window wilder
 ```
 
 ## Inspiration
