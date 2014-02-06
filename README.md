@@ -191,6 +191,14 @@ export TMUXIFIER_NO_COMPLETE=1
 export TMUXIFIER_SESSION_BASE_PATH=~/code
 ```
 
+### Custom Template Path
+
+You can customize the template directory used by Tmuxifier by setting
+
+```bash
+export TMUXIFIER_TEMPLATE_PATH="$HOME/.tmuxinator-templates"
+```
+
 ## Inspiration
 
 - Tmuxifier is largely inspired by [Tmuxinator][].

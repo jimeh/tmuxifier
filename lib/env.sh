@@ -11,3 +11,10 @@ if [ -z "${TMUXIFIER_SESSION_BASE_PATH}" ]; then
 else
   export TMUXIFIER_SESSION_BASE_PATH="${TMUXIFIER_SESSION_BASE_PATH%/}"
 fi
+
+# Setup template path.
+if [ -z "${TMUXIFIER_TEMPLATE_PATH}" ]; then
+  export TMUXIFIER_TEMPLATE_PATH="${TMUXIFIER}/templates"
+else
+  export TMUXIFIER_TEMPLATE_PATH="${TMUXIFIER_TEMPLATE_PATH%/}"
+fi
