@@ -5,7 +5,7 @@ and pane configurations with ease.
 
 In short, Tmuxifier allows you to easily create, edit, and load "layout"
 files, which are simple shell scripts where you use the `tmux` command and
-helper commands provided by tmuxifier to manage Tmux sessions and windows
+helper commands provided by `tmuxifier` to manage Tmux sessions and windows
 
 ### Window Layouts
 
@@ -54,13 +54,13 @@ Clone the repo to your machine:
 
     git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
 
-Then add `~/.tmuxifier/bin` to your PATH to make the `tmuxifier` executable
+Then add `$HOME/.tmuxifier/bin` to your PATH to make the `tmuxifier` executable
 available to you:
 
 __In bash & zsh:__
 
 ```bash
-export PATH="~/.tmuxifier/bin:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$PATH"
 ```
 
 __In tcsh:__
