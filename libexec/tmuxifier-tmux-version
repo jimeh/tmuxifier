@@ -1,0 +1,61 @@
+#! /usr/bin/env bash
+shopt -s extglob
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier tmux-version [target-version]
+
+Outputs current Tmux version. If given optional target-version it uses the
+compare-versions command to output one of three possible characters indicating
+if the current Tmux version is equal to, less, or higher version than the
+the [target-version].
+
+The three possible outputs are \"=\", \"<\", and \">\"."
+  exit
+fi
+
+# The vercomp() function is shamelessly ripped/borrowed from the following
+# StackOverflow answer: http://stackoverflow.com/a/4025065/42146
+vercomp () {
+  if [[ $1 == $2 ]]; then return 0; fi
+
+  local IFS=.
+  local i ver1=($1) ver2=($2)
+
+  # fill empty fields in ver1 with zeros
+  for ((i=${#ver1[@]}; i<${#ver2[@]}; i++)); do ver1[i]=0; done
+
+  for ((i=0; i<${#ver1[@]}; i++)); do
+    # fill empty fields in ver2 with zeros
+    if [[ -z ${ver2[i]} ]]; then ver2[i]=0; fi
+
+    if ((10#${ver1[i]} > 10#${ver2[i]})); then
+      return 1
+    elif ((10#${ver1[i]} < 10#${ver2[i]})); then
+      return 2
+    fi
+  done
+  return 0
+}
+
+version=$(tmux -V)
+version=${version/tmux /}
+
+if [ -n "$1" ]; then
+  # Fix for "1.9a" version comparison, as vercomp() can only deal with
+  # purely numeric version numbers.
+  version=${version//+([a-zA-Z])/}
+
+  vercomp "$version" "$1"
+  case $? in
+    0) echo '=';;
+    1) echo '>';;
+    2) echo '<';;
+  esac
+else
+  echo "$version"
+fi

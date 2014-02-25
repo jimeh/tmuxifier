@@ -233,16 +233,25 @@ initialize_session() {
 
   # Check if the named session already exists.
   if ! tmuxifier-tmux has-session -t "$session:" 2>/dev/null; then
-    # Create the new session.
-    env TMUX="" tmuxifier-tmux new-session -d -s "$session"
+    if [ "$(tmuxifier-tmux-version "1.9")" == "<" ]; then
+      # Tmux 1.8 and earlier.
 
-    # Set default-path for session
-    if [ -n "$session_root" ] && [ -d "$session_root" ]; then
-      cd "$session_root"
+      # Create the new session.
+      env TMUX="" tmuxifier-tmux new-session -d -s "$session"
 
-      $set_default_path && tmuxifier-tmux \
-        set-option -t "$session:" \
-        default-path "$session_root" 1>/dev/null
+      # Set default-path for session
+      if [ -n "$session_root" ] && [ -d "$session_root" ]; then
+        cd "$session_root"
+
+        $set_default_path && tmuxifier-tmux \
+          set-option -t "$session:" \
+          default-path "$session_root" 1>/dev/null
+      fi
+    else
+      # Tmux 1.9 and later.
+      if $set_default_path; then local session_args=(-c "$session_root"); fi
+      env TMUX="" tmuxifier-tmux new-session \
+        -d -s "$session" "${session_args[@]}"
     fi
 
     # In order to ensure only specified windows are created, we move the
