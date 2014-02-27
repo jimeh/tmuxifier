@@ -69,6 +69,12 @@ __In tcsh:__
 set path = ( "~/.tmuxifier/bin" $path )
 ```
 
+__In fish:__
+
+```fish
+set -gx PATH "~/.tmuxifier/bin $PATH
+```
+
 ### Custom Installation Path
 
 To install Tmuxifier somewhere else than the suggested `~/.tmuxifier`, simply
@@ -92,6 +98,14 @@ Add the following to your `~/.cshrc`, `~/.tcshrc` or equivalent:
 
 ```tcsh
 eval `tmuxifier init -`
+```
+
+__In fish:__
+
+And add the following to your `~/.config/fish/config.fish` or equivalent:
+
+```fish
+eval (tmuxifier init -)
 ```
 
 If you need to pass custom arguments to tmux itself, you can do so by setting

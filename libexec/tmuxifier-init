@@ -29,6 +29,9 @@ case "$shell" in
   tcsh )
     profile='~/.tcshrc'
     ;;
+  fish )
+    profile='~/.config/fish/config.fish'
+    ;;
   * )
     profile='shell init file'
     ;;
@@ -44,6 +47,10 @@ Load Tmuxifier by adding the following to your ${profile}:
   case "$shell" in
     csh | tcsh )
       echo "    eval \`tmuxifier init -\`
+"
+      ;;
+    fish )
+      echo "    eval (tmuxifier init -)
 "
       ;;
     * )
@@ -66,6 +73,10 @@ case "$shell" in
   csh | tcsh )
     echo "setenv TMUXIFIER \"$TMUXIFIER\";"
     echo "source \"\$TMUXIFIER/init.tcsh\";"
+    ;;
+  fish )
+    echo "set -gx TMUXIFIER \"$TMUXIFIER\";"
+    echo "source \"\$TMUXIFIER/init.fish\";"
     ;;
   * )
     echo "export TMUXIFIER=\"$TMUXIFIER\";"
