@@ -270,9 +270,9 @@ initialize_session() {
 
 # Finalize session creation and then switch to it if needed.
 #
-# When the session is created, it leaves a unused window in position #99, this
-# is the default window which was created with the session, but it's also a
-# window that was not explicitly created. Hence we kill it.
+# When the session is created, it leaves a unused window in position #999,
+# this is the default window which was created with the session, but it's also
+# a window that was not explicitly created. Hence we kill it.
 #
 # If the session was created, we've already been switched to it. If it was not
 # created, the session already exists, and we'll need to specifically switch
