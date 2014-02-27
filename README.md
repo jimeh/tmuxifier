@@ -184,8 +184,8 @@ export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
 
 ### Disable Shell-Completion
 
-Tmuxifier comes with shell-completion for bash, zsh and tcsh. If for any
-reason you need to disable it, just set `$TMUXIFIER_NO_COMPLETE`.
+Tmuxifier comes with shell-completion for bash, zsh, tcsh, and fish. If for
+any reason you need to disable it, just set `$TMUXIFIER_NO_COMPLETE`.
 
 ```bash
 export TMUXIFIER_NO_COMPLETE=1
