@@ -118,8 +118,10 @@ eval "$(tmuxifier init -)"
 
 ## Updating
 
-    cd ~/.tmuxifier
-    git pull
+```bash
+cd ~/.tmuxifier # or where you've cloned tmuxifier to
+git pull
+```
 
 ## Usage
 
