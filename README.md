@@ -109,11 +109,18 @@ eval (tmuxifier init -)
 ```
 
 If you need to pass custom arguments to tmux itself, you can do so by setting
-the `TMUXIFIER_TMUX_OPTS` environment variable. For example:
+the `TMUXIFIER_TMUX_OPTS` environment variable. For example to set global
+arguments:
 
 ```bash
 export TMUXIFIER_TMUX_OPTS="-L my-awesome-socket-name"
 eval "$(tmuxifier init -)"
+```
+
+Or dynamically when calling `tmuxifier`:
+
+```bash
+TMUXIFIER_TMUX_OPTS="-L other-session" tmuxifier load-session welcome
 ```
 
 ## Updating
