@@ -302,8 +302,9 @@ __expand_path() {
 }
 
 __get_first_window_index() {
-  local index
-  index=$(tmuxifier-tmux list-windows -t "$session:" -F "#{window_index}" 2>/dev/null)
+  local index=$(tmuxifier-tmux list-windows -t "$session:" \
+    -F "#{window_index}" 2>/dev/null)
+
   if [ -n "$index" ]; then
     echo "$index" | head -1
   else
