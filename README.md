@@ -71,8 +71,8 @@ set path = ( "~/.tmuxifier/bin" $path )
 
 __In fish:__
 
-```fish
-set -gx PATH "~/.tmuxifier/bin $PATH
+```bash
+set -gx PATH "~/.tmuxifier/bin" $PATH
 ```
 
 ### Custom Installation Path
@@ -104,7 +104,7 @@ __In fish:__
 
 And add the following to your `~/.config/fish/config.fish` or equivalent:
 
-```fish
+```bash
 eval (tmuxifier init -)
 ```
 
