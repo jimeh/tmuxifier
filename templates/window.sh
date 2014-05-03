@@ -16,7 +16,7 @@ new_window "{{WINDOW_NAME}}"
 
 # Paste text
 #send_keys "top"    # paste into active pane
-#send_keys "date" 1 # paste into active pane
+#send_keys "date" 1 # paste into pane 1
 
 # Set active pane.
 #select_pane 0
