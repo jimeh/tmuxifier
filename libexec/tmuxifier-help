@@ -35,7 +35,7 @@ Some useful tmuxifier commands are:
    new-window     nw       Create new window layout and open it with \$EDITOR.
    edit-session   es       Edit specified session layout with \$EDITOR.
    edit-window    ew       Edit specified window layout with \$EDITOR.
-   commands                List all tmuxifier commands.
+   commands                List all tmuxifier commands (including internal).
    version                 Print Tmuxifier version.
    help                    Show this message.
 

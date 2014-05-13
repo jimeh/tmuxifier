@@ -9,10 +9,9 @@ source "$TMUXIFIER/lib/util.sh"
 if calling-help "$@"; then
   echo "usage: tmuxifier tmux-version [target-version]
 
-Outputs current Tmux version. If given optional target-version it uses the
-compare-versions command to output one of three possible characters indicating
-if the current Tmux version is equal to, less, or higher version than the
-the [target-version].
+Outputs current Tmux version. If given optional target-version it outputs one
+of three possible characters indicating if the current Tmux version number is
+equal to, less than, or greater than the [target-version].
 
 The three possible outputs are \"=\", \"<\", and \">\"."
   exit

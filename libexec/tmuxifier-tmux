@@ -2,4 +2,13 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier tmux [...]
+
+Wrapper command for Tmux executable allowing Tmuxifier to pass in any custom
+arguments specified in the TMUXIFIER_TMUX_OPTS environment variable."
+  exit
+fi
+
 tmux $TMUXIFIER_TMUX_OPTS "$@"
