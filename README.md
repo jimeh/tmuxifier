@@ -122,7 +122,7 @@ eval "$(tmuxifier init -)"
 And/or specify dynamically when calling `tmuxifier`:
 
 ```bash
-TMUXIFIER_TMUX_OPTS="-L other-session" tmuxifier load-session welcome
+TMUXIFIER_TMUX_OPTS="-L other-socket" tmuxifier load-session welcome
 ```
 
 ## Updating
