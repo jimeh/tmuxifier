@@ -5,7 +5,7 @@ source "../test-helper.sh"
 # runtime.sh tests.
 #
 
-source "../../lib/runtime.sh"
+source "${root}/lib/runtime.sh"
 
 # We assume env.sh has been sourced if $TMUXIFIER_LAYOUT_PATH has been set.
 assert 'echo $TMUXIFIER_LAYOUT_PATH' "${TMUXIFIER}/layouts"

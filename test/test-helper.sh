@@ -21,8 +21,11 @@ abs_dirname() {
 # Set testroot variable.
 testroot="$(abs_dirname "$BASH_SOURCE")"
 
+# Set root variable.
+root="$(abs_dirname "$testroot/../..")"
+
 # Set TMUXIFIER environment variable
-TMUXIFIER="$(abs_dirname "$testroot/../..")"
+TMUXIFIER="$root"
 
 # Unset various Tmuxifier environment variables to prevent a local install of
 # Tmuxifier interfering with tests.
