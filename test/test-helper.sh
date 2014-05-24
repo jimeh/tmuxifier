@@ -1,10 +1,28 @@
 [ -n "$TEST_DEBUG" ] && set -x
 
+resolve_link() {
+  $(type -p greadlink readlink | head -1) $1
+}
+
+abs_dirname() {
+  local cwd="$(pwd)"
+  local path="$1"
+
+  while [ -n "$path" ]; do
+    cd "${path%/*}"
+    local name="${path##*/}"
+    path="$(resolve_link "$name" || true)"
+  done
+
+  pwd
+  cd "$cwd"
+}
+
 # Set testroot variable.
-testroot="$(dirname "$BASH_SOURCE")"
+testroot="$(abs_dirname "$BASH_SOURCE")"
 
 # Set TMUXIFIER environment variable
-TMUXIFIER="$(dirname "$testroot")"
+TMUXIFIER="$(abs_dirname "$testroot/../..")"
 
 # Unset various Tmuxifier environment variables to prevent a local install of
 # Tmuxifier interfering with tests.
