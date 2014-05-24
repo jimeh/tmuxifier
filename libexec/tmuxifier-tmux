@@ -6,7 +6,7 @@ set -e
 source "$TMUXIFIER/lib/util.sh"
 
 # Provide tmuxifier help
-if calling-help "$@"; then
+if [[ " $@ " == *" --help "* ]]; then
   echo "usage: tmuxifier tmux [...]
 
 Wrapper command for Tmux executable allowing Tmuxifier to pass in any custom
