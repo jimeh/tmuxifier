@@ -25,8 +25,8 @@ testfiles="$(find "$testdir" -name "*-test.sh")"
 RET=0
 for testfile in $testfiles; do
   echo ""
-  echo -en "\033[0;35mrunning: "
-  echo -e "\033[0;36m${testfile/#$(dirname "$testdir")\//}\033[0m"
+  echo -en "$(tput setaf 5)running: "
+  echo -e "$(tput setaf 6)${testfile/#$(dirname "$testdir")\//}$(tput sgr0)"
   cd "$(dirname "$testfile")"
   "$testfile"
   if [ "$?" != "0" ]; then RET=1; fi
