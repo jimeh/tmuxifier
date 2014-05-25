@@ -1,4 +1,4 @@
 language: bash
 script: make test
 before_install:
-    - sudo apt-get install bc
+    - sudo apt-get install bc tmux
