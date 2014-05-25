@@ -15,8 +15,8 @@ tmux $TMUXIFIER_TMUX_OPTS new -d -s foobar
 tmux $TMUXIFIER_TMUX_OPTS new -d -s dude
 
 # Passes all arguments to Tmux.
-assert "${libexec}/tmuxifier-tmux list-sessions -F \"#{session_id}: #S\"" \
-       "\$1: dude\n\$0: foobar"
+assert "${libexec}/tmuxifier-tmux list-sessions -F \"- #{session_name}\"" \
+       "- dude\n- foobar"
 
 # Tear down.
 tmux $TMUXIFIER_TMUX_OPTS kill-server
