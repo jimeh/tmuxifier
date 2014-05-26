@@ -27,6 +27,10 @@ root="$(abs_dirname "$testroot/../..")"
 # Set TMUXIFIER environment variable
 TMUXIFIER="$root"
 
+# Unset TMUX environment variable, tests assume they're not running within
+# Tmux.
+unset TMUX
+
 # Unset various Tmuxifier environment variables to prevent a local install of
 # Tmuxifier interfering with tests.
 unset TMUXIFIER_LAYOUT_PATH

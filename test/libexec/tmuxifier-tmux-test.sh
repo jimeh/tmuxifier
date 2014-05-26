@@ -8,8 +8,6 @@ source "${root}/lib/util.sh"
 
 # Setup.
 libexec="${root}/libexec"
-realTMUX="$TMUX"
-unset TMUX
 export TMUXIFIER_TMUX_OPTS="-L tmuxifier-tests"
 tmux $TMUXIFIER_TMUX_OPTS new -d -s foobar
 tmux $TMUXIFIER_TMUX_OPTS new -d -s dude
@@ -21,8 +19,6 @@ assert "${libexec}/tmuxifier-tmux list-sessions -F \"- #{session_name}\"" \
 # Tear down.
 tmux $TMUXIFIER_TMUX_OPTS kill-server
 unset TMUXIFIER_TMUX_OPTS
-TMUX="$realTMUX"
-unset realTMUX
 
 # End of tests.
 assert_end "tmuxifier-tmux"
