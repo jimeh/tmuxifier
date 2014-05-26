@@ -21,7 +21,7 @@ test/stub.sh:
 	test -f "test/stub.sh" || ( \
 		echo "fetching test/stub.sh..." && \
 		curl -s -L -o test/stub.sh \
-			https://raw.github.com/jimeh/stub.sh/v0.3.0/stub.sh \
+			https://raw.github.com/jimeh/stub.sh/v1.0.1/stub.sh \
 	)
 
 update-stub.sh: remove-stub.sh test/stub.sh
