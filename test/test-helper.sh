@@ -24,8 +24,11 @@ testroot="$(abs_dirname "$BASH_SOURCE")"
 # Set root variable.
 root="$(abs_dirname "$testroot/../..")"
 
-# Set TMUXIFIER environment variable
+# Set TMUXIFIER environment variable.
 TMUXIFIER="$root"
+
+# Setup PATH environment variable.
+PATH="$root/bin:$root/libexec:$PATH"
 
 # Unset TMUX environment variable, tests assume they're not running within
 # Tmux.
