@@ -9,7 +9,7 @@ test-runner.sh:
 	test -f "test-runner.sh" || \
 		echo "fetching test-runner.sh..." && \
 		curl -s -L -o test-runner.sh \
-			https://github.com/jimeh/test-runner.sh/raw/v0.1.0/test-runner.sh && \
+			https://github.com/jimeh/test-runner.sh/raw/v0.2.0/test-runner.sh && \
 		chmod +x test-runner.sh
 
 remove-test-runner.sh:
