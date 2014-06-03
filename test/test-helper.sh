@@ -18,6 +18,9 @@ abs_dirname() {
   cd "$cwd"
 }
 
+# Find and store path to Tmux binary.
+TMUX_BIN="$(command -v tmux)"
+
 # Set testroot variable.
 testroot="$(abs_dirname "$BASH_SOURCE")"
 
@@ -43,3 +46,29 @@ unset TMUXIFIER_NO_COMPLETE
 # Include assert.sh and stub.sh libraries.
 source "${testroot}/assert.sh"
 source "${testroot}/stub.sh"
+
+
+test-socket-tmux() {
+  export TMUXIFIER_TMUX_OPTS="-L tmuxifier-tests"
+  "$TMUX_BIN" $TMUXIFIER_TMUX_OPTS $@
+}
+
+create-test-session() {
+  session="$1"
+  if [ -z "$session" ]; then session="test"; fi
+
+  test-socket-tmux new-session -d -s "$session"
+}
+
+kill-test-session() {
+  local target="$1"
+  if [ -z "$target" ]; then target="$session"; fi
+
+  test-socket-tmux kill-session -t "$target"
+}
+
+kill-test-server() {
+  test-socket-tmux kill-server
+  unset TMUXIFIER_TMUX_OPTS
+  unset session
+}
