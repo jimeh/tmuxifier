@@ -18,9 +18,11 @@ tmux() {
 #   - $2: (optional) Shell command to execute when window is created.
 #
 new_window() {
-  if [ -n "$1" ]; then window="$1"; fi
+  if [ -n "$1" ]; then
+    window="$1"
+    local winarg=(-n "$window")
+  fi
   if [ -n "$2" ]; then local command=("$2"); fi
-  if [ -n "$window" ]; then local winarg=(-n "$window"); fi
 
   tmuxifier-tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
   __go_to_window_or_session_path
