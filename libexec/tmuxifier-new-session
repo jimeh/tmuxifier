@@ -47,7 +47,7 @@ content="$(cat "$template")"
 echo "${content//\{\{SESSION_NAME\}\}/$layout_name}" > "$layout_file"
 
 if [ -n "$EDITOR" ]; then
-  exec "$EDITOR" "$layout_file"
+  exec $EDITOR "$layout_file"
 else
   echo "Layout file has been created, but '\$EDITOR' is not set. Please "
   echo "manually open the layout for editing:"

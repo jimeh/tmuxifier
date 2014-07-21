@@ -38,7 +38,7 @@ if [ ! -f "$layout_file" ]; then
 fi
 
 if [ -n "$EDITOR" ]; then
-  exec "$EDITOR" "$layout_file"
+  exec $EDITOR "$layout_file"
 else
   echo "'\$EDITOR' is not set. Please manually open the layout for editing:"
   echo "$layout_file"
