@@ -48,6 +48,10 @@ source "${testroot}/assert.sh"
 source "${testroot}/stub.sh"
 
 
+#
+# Test Helpers
+#
+
 test-socket-tmux() {
   export TMUXIFIER_TMUX_OPTS="-L tmuxifier-tests"
   "$TMUX_BIN" $TMUXIFIER_TMUX_OPTS $@
@@ -71,4 +75,13 @@ kill-test-server() {
   test-socket-tmux kill-server
   unset TMUXIFIER_TMUX_OPTS
   unset session
+}
+
+test-socket-window-count() {
+  local list="$(test-socket-tmux list-windows)"
+  if [ -n "$1" ]; then
+    echo "$list" | grep $1 | wc -l | awk '{print $1}'
+  else
+    echo "$list" | wc -l | awk '{print $1}'
+  fi
 }
