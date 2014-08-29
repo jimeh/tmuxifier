@@ -313,6 +313,15 @@ __get_first_window_index() {
   fi
 }
 
+__get_current_window_index() {
+  local lookup=$(tmuxifier-tmux list-windows -t "$session:" \
+    -F "#{window_active}:#{window_index}" 2>/dev/null | grep "^1:")
+
+  if [ -n "$lookup" ]; then
+    echo "${lookup/1:}"
+  fi
+}
+
 __go_to_session() {
   if [ -z "$TMUX" ]; then
     tmuxifier-tmux -u attach-session -t "$session:"
