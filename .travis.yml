@@ -1,0 +1,15 @@
+language: c
+env:
+  - TMUX_VERSION="1.6"
+  - TMUX_VERSION="1.7"
+  - TMUX_VERSION="1.8"
+  - TMUX_VERSION="1.9a"
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y bc build-essential libevent-dev libncurses5-dev
+  - wget http://downloads.sourceforge.net/tmux/tmux-${TMUX_VERSION}.tar.gz
+  - tar -zxf tmux-${TMUX_VERSION}.tar.gz
+  - cd tmux-${TMUX_VERSION}
+  - ./configure && make && sudo make install
+  - cd ..
+script: make test
