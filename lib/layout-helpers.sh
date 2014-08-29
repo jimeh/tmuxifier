@@ -275,8 +275,7 @@ initialize_session() {
 # a window that was not explicitly created. Hence we kill it.
 #
 # If the session was created, we've already been switched to it. If it was not
-# created, the session already exists, and we'll need to specifically switch
-# to it here.
+# created, but already existed, then we'll need to specifically switch to it.
 #
 finalize_and_go_to_session() {
   ! tmuxifier-tmux kill-window -t "$session:999" 2>/dev/null
