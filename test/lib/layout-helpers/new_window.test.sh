@@ -34,6 +34,7 @@ stub __go_to_window_or_session_path
 new_window "foobardoo" "touch /tmp/tmuxifier-new_window-test; bash"
 assert "test-socket-window-count" "2"
 assert "test-socket-window-count foobardoo" "1"
+sleep 0.1 # attempt to avoid timing issue causing flicker
 assert_raises 'test -f "/tmp/tmuxifier-new_window-test"' 0
 restore __go_to_window_or_session_path
 kill-test-session
