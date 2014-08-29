@@ -39,9 +39,20 @@ restore __go_to_window_or_session_path
 kill-test-session
 rm "/tmp/tmuxifier-new_window-test" &> /dev/null
 
-
-# Tear down.
-kill-test-server
+# When called ensure it sets the $window variable to the index of the newly
+# created window.
+unset window
+create-test-session
+stub __go_to_window_or_session_path
+new_window "foo"
+assert "echo $window" "1"
+new_window
+assert "echo $window" "2"
+new_window "bar"
+assert "echo $window" "3"
+restore __go_to_window_or_session_path
+kill-test-session
+unset window
 
 # End of tests.
 assert_end "new_window()"
