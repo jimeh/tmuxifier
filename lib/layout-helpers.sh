@@ -18,11 +18,11 @@ tmux() {
 #   - $2: (optional) Shell command to execute when window is created.
 #
 new_window() {
-  if [ -n "$1" ]; then window="$1"; fi
+  if [ -n "$1" ]; then local winarg=(-n "$1"); fi
   if [ -n "$2" ]; then local command=("$2"); fi
-  if [ -n "$window" ]; then local winarg=(-n "$window"); fi
 
   tmuxifier-tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
+  window="$(__get_current_window_index)"
   __go_to_window_or_session_path
 }
 
@@ -89,6 +89,7 @@ clock() {
 #
 select_window() {
   tmuxifier-tmux select-window -t "$session:$1"
+  window="$(__get_current_window_index)"
 }
 
 # Select a specific pane in the current window.
@@ -308,6 +309,15 @@ __get_first_window_index() {
     echo "$index" | head -1
   else
     echo "0"
+  fi
+}
+
+__get_current_window_index() {
+  local lookup=$(tmuxifier-tmux list-windows -t "$session:" \
+    -F "#{window_active}:#{window_index}" 2>/dev/null | grep "^1:")
+
+  if [ -n "$lookup" ]; then
+    echo "${lookup/1:}"
   fi
 }
 
