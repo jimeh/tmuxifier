@@ -232,40 +232,40 @@ initialize_session() {
   tmuxifier-tmux start-server
 
   # Check if the named session already exists.
-  if ! tmuxifier-tmux has-session -t "$session:" 2>/dev/null; then
-    if [ "$(tmuxifier-tmux-version "1.9")" == "<" ]; then
-      # Tmux 1.8 and earlier.
+  if tmuxifier-tmux has-session -t "$session:" 2>/dev/null; then
+    return 1
+  fi
 
-      # Create the new session.
-      env TMUX="" tmuxifier-tmux new-session -d -s "$session"
+  # Tmux 1.8 and earlier.
+  if [ "$(tmuxifier-tmux-version "1.9")" == "<" ]; then
+    # Create the new session.
+    env TMUX="" tmuxifier-tmux new-session -d -s "$session"
 
-      # Set default-path for session
-      if [ -n "$session_root" ] && [ -d "$session_root" ]; then
-        cd "$session_root"
+    # Set default-path for session
+    if [ -n "$session_root" ] && [ -d "$session_root" ]; then
+      cd "$session_root"
 
-        $set_default_path && tmuxifier-tmux \
-          set-option -t "$session:" \
-          default-path "$session_root" 1>/dev/null
-      fi
-    else
-      # Tmux 1.9 and later.
-      if $set_default_path; then local session_args=(-c "$session_root"); fi
-      env TMUX="" tmuxifier-tmux new-session \
-        -d -s "$session" "${session_args[@]}"
+      $set_default_path && tmuxifier-tmux \
+        set-option -t "$session:" \
+        default-path "$session_root" 1>/dev/null
     fi
 
-    # In order to ensure only specified windows are created, we move the
-    # default window to position 999, and later remove it with the
-    # `finalize_and_go_to_session` function.
-    local first_window_index=$(__get_first_window_index)
-    tmuxifier-tmux move-window \
-      -s "$session:$first_window_index" -t "$session:999"
+  # Tmux 1.9 and later.
+  else
+    if $set_default_path; then
+      local session_args=(-c "$session_root")
+    fi
 
-    # Session created, return ok exit status.
-    return 0
+    env TMUX="" tmuxifier-tmux new-session \
+      -d -s "$session" "${session_args[@]}"
   fi
-  # Session already existed, return error exit status.
-  return 1
+
+  # In order to ensure only specified windows are created, we move the
+  # default window to position 999, and later remove it with the
+  # `finalize_and_go_to_session` function.
+  local first_window_index=$(__get_first_window_index)
+  tmuxifier-tmux move-window \
+    -s "$session:$first_window_index" -t "$session:999"
 }
 
 # Finalize session creation and then switch to it if needed.
