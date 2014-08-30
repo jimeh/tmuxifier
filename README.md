@@ -180,6 +180,14 @@ To load the session layout simply run:
 You'll now have a new Tmux session with your previously defined awesome window
 in it.
 
+To customize the `sessions_root` simply append the path at creation
+
+    tmuxifier new-session my-awesome-session .
+
+or 
+
+    tmuxifier new-session my-awesome-session ~/.tmuxifier
+
 [examples]: https://github.com/jimeh/tmuxifier/tree/master/examples
 
 ## Configure & Customize
@@ -200,6 +208,29 @@ any reason you need to disable it, just set `$TMUXIFIER_NO_COMPLETE`.
 
 ```bash
 export TMUXIFIER_NO_COMPLETE=1
+```
+
+### Custom Session Base Path
+
+```bash
+export TMUXIFIER_SESSION_BASE_PATH=~/code
+```
+
+### Custom Template Path
+
+You can customize the template directory used by Tmuxifier by setting
+
+```bash
+export TMUXIFIER_TEMPLATE_PATH="$HOME/.tmuxinator-templates"
+export TMUXIFIER_SESSION_TEMPLATE_NAME="awesome-session"
+export TMUXIFIER_WINDOW_TEMPLATE_NAME="awesome-window"
+```
+
+or for special cases
+
+```
+TMUXIFIER_SESSION_TEMPLATE_NAME=awesome-session tmuxifier new-window wilder
+TMUXIFIER_WINDOW_TEMPLATE_NAME=awesome-window tmuxifier new-window wilder
 ```
 
 ## Inspiration
