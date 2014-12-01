@@ -202,6 +202,22 @@ any reason you need to disable it, just set `$TMUXIFIER_NO_COMPLETE`.
 export TMUXIFIER_NO_COMPLETE=1
 ```
 
+## Tips
+
+### iTerm2 Integration
+
+Tmuxifier supports iTerm2's [Tmux integration][]. It can be used in two ways:
+
+- Passing `-CC` as a second argument to the `load-session` command. For
+example:
+
+        tmuxifier load-session my-awesome-session -CC
+
+- Setting the `TMUXIFIER_TMUX_ITERM_ATTACH` environment variable to `-CC`
+  before calling the `load-session` command.
+
+[tmux integration]: https://code.google.com/p/iterm2/wiki/TmuxIntegration
+
 ## Inspiration
 
 - Tmuxifier is largely inspired by [Tmuxinator][].

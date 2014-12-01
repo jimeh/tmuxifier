@@ -7,7 +7,7 @@ source "$TMUXIFIER/lib/util.sh"
 
 # Provide tmuxifier help
 if calling-help "$@"; then
-  echo "usage: tmuxifier load-session <layout_name | file_path>
+  echo "usage: tmuxifier load-session <layout_name | file_path> [<iterm mode>]
 
 Aliases: session, ses, s
 
@@ -29,6 +29,10 @@ fi
 
 # Load runtime functions.
 source "$TMUXIFIER/lib/runtime.sh"
+
+if [ "$2" == "-CC" ]; then
+  export TMUXIFIER_TMUX_ITERM_ATTACH="-CC"
+fi
 
 # Load session file.
 load_session "$1"

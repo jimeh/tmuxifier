@@ -323,7 +323,8 @@ __get_current_window_index() {
 
 __go_to_session() {
   if [ -z "$TMUX" ]; then
-    tmuxifier-tmux -u attach-session -t "$session:"
+    tmuxifier-tmux $TMUXIFIER_TMUX_ITERM_ATTACH -u \
+      attach-session -t "$session:"
   else
     tmuxifier-tmux -u switch-client -t "$session:"
   fi
