@@ -7,7 +7,7 @@ source "$TMUXIFIER/lib/util.sh"
 
 # Provide tmuxifier help
 if calling-help "$@"; then
-  echo "usage: tmuxifier tmux-version [target-version]
+  echo "usage: tmuxifier tmux-version [<target-version>]
 
 Outputs current Tmux version. If given optional target-version it outputs one
 of three possible characters indicating if the current Tmux version number is

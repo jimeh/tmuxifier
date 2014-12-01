@@ -11,7 +11,11 @@ if calling-help "$@"; then
 
 Aliases: window, win, w
 
-Create a new window using the specified window layout in the current session."
+Create a new window using the specified window layout in the current session.
+
+Arguments:
+   <layout_name | file_path>  - Name of a window layout stored in the layouts
+                                directory, or path to a window layout file."
   exit
 fi
 

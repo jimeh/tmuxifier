@@ -12,7 +12,14 @@ if calling-help "$@"; then
 Aliases: session, ses, s
 
 Create a session using the session layout, unless the session already exists
-in which case, we simply attach/switch to the existing one."
+in which case, we simply attach/switch to the existing one.
+
+Arguments:
+   <layout_name | file_path>  - Name of a session layout stored in the layouts
+                                directory, or path to a session layout file.
+   <iterm mode>               - When given as \"-CC\" tmux will be called with
+                                the -CC argument enabling iTerm2 integration.
+                                More info: http://bit.ly/1yDbMlm"
   exit
 fi
 
