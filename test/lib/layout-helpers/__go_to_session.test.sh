@@ -16,6 +16,16 @@ assert_raises \
   "stub_called_with tmuxifier-tmux -u attach-session -t \"${session}:\"" 0
 restore tmuxifier-tmux
 
+# When TMUXIFIER_TMUX_ITERM_ATTACH is set, pass it in as first argument(s) to
+# tmuxifier-tmux
+TMUXIFIER_TMUX_ITERM_ATTACH="-CC"
+stub tmuxifier-tmux
+__go_to_session
+assert_raises \
+  "stub_called_with tmuxifier-tmux -CC -u attach-session -t \"${session}:\"" 0
+restore tmuxifier-tmux
+unset TMUXIFIER_TMUX_ITERM_ATTACH
+
 # When TMUX is set, switch to $session.
 TMUX="/tmp/tmux-501/default,1203,0"
 stub tmuxifier-tmux
