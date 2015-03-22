@@ -76,7 +76,12 @@ case "$shell" in
     ;;
   fish )
     echo "set -gx TMUXIFIER \"$TMUXIFIER\";"
-    echo "source \"\$TMUXIFIER/init.fish\";"
+    # fish shell 2.0.0 does not have the source alias
+    if [[ $(fish --version 2>&1 | awk -F'version ' '{print $2}') = '2.0.0' ]]; then
+      echo ". \"\$TMUXIFIER/init.fish\";"
+    else
+      echo "source \"\$TMUXIFIER/init.fish\";"
+    fi  
     ;;
   * )
     echo "export TMUXIFIER=\"$TMUXIFIER\";"
