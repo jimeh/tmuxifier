@@ -261,6 +261,11 @@ initialize_session() {
       -d -s "$session" "${session_args[@]}"
   fi
 
+  if $set_default_path && [[ "$session_root" != "$HOME" ]]; then
+    tmuxifier-tmux setenv -t "$session:" \
+      TMUXIFIER_SESSION_ROOT "$session_root"
+  fi
+
   # In order to ensure only specified windows are created, we move the
   # default window to position 999, and later remove it with the
   # `finalize_and_go_to_session` function.
@@ -331,9 +336,19 @@ __go_to_session() {
 }
 
 __go_to_window_or_session_path() {
-  local window_or_session_root=${window_root-$session_root}
-  if [ -n "$window_or_session_root" ]; then
-    run_cmd "cd \"$window_or_session_root\""
+  local target_path
+
+  if [ -n "$window_root" ]; then
+    target_path="$window_root"
+  elif [ -n "$TMUXIFIER_SESSION_ROOT" ]; then
+    target_path="$TMUXIFIER_SESSION_ROOT"
+  elif [ -n "$session_root" ]; then
+    target_path="$session_root"
+  fi
+
+  # local window_or_session_root=${window_root-$session_root}
+  if [ -n "$target_path" ]; then
+    run_cmd "cd \"$target_path\""
     run_cmd "clear"
   fi
 }
