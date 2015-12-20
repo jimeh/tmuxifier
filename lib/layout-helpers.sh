@@ -22,6 +22,10 @@ new_window() {
   if [ -n "$2" ]; then local command=("$2"); fi
 
   tmuxifier-tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
+
+  # Disable renaming if a window name was given.
+  if [ -n "$1" ]; then tmuxifier-tmux set-option -t "$1" allow-rename off; fi
+
   window="$(__get_current_window_index)"
   __go_to_window_or_session_path
 }
