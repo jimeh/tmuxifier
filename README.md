@@ -216,7 +216,7 @@ example:
 - Setting the `TMUXIFIER_TMUX_ITERM_ATTACH` environment variable to `-CC`
   before calling the `load-session` command.
 
-[tmux integration]: https://code.google.com/p/iterm2/wiki/TmuxIntegration
+[tmux integration]: https://gitlab.com/gnachman/iterm2/wikis/TmuxIntegration
 
 ## Inspiration
 
