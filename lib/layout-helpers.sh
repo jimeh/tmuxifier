@@ -189,30 +189,38 @@ load_window() {
 #   - $2: (optional) Override default window name.
 #
 load_session() {
-  local file="$1"
-  if [ ! -f "$file" ]; then
-    file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
-  fi
-
-  if [ -f "$file" ]; then
-    if [ $# -gt 1 ]; then
-      session="$2"
+  local file
+  if [ "${1#*/}" = "$1" ]; then
+    # There's no slash in the path.
+    if [ -f "$TMUXIFIER_LAYOUT_PATH/$1.session.sh" ] || [ ! -f "$1" ]; then
+      file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
     else
-      session="${1/%.session.sh}"
-      session="${session/%.sh}"
-    fi
-
-    set_default_path=true
-    source "$file"
-    session=
-
-    # Reset `$session_root`.
-    if [[ "$session_root" != "$HOME" ]]; then
-      session_root="$HOME"
+      # bash's 'source' requires an slash in the filename to not use $PATH.
+      file="./$1"
     fi
   else
+    file="$1"
+  fi
+
+  if ! [ -f "$file" ]; then
     echo "\"$1\" session layout not found." >&2
     return 1
+  fi
+
+  if [ $# -gt 1 ]; then
+    session="$2"
+  else
+    session="${1/%.session.sh}"
+    session="${session/%.sh}"
+  fi
+
+  set_default_path=true
+  source "$file"
+  session=
+
+  # Reset `$session_root`.
+  if [[ "$session_root" != "$HOME" ]]; then
+    session_root="$HOME"
   fi
 }
 
