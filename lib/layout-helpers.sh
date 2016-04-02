@@ -202,25 +202,25 @@ load_session() {
     file="$1"
   fi
 
-  if [ -f "$file" ]; then
-    if [ $# -gt 1 ]; then
-      session="$2"
-    else
-      session="${1/%.session.sh}"
-      session="${session/%.sh}"
-    fi
-
-    set_default_path=true
-    source "$file"
-    session=
-
-    # Reset `$session_root`.
-    if [[ "$session_root" != "$HOME" ]]; then
-      session_root="$HOME"
-    fi
-  else
+  if ! [ -f "$file" ]; then
     echo "\"$1\" session layout not found." >&2
     return 1
+  fi
+
+  if [ $# -gt 1 ]; then
+    session="$2"
+  else
+    session="${1/%.session.sh}"
+    session="${session/%.sh}"
+  fi
+
+  set_default_path=true
+  source "$file"
+  session=
+
+  # Reset `$session_root`.
+  if [[ "$session_root" != "$HOME" ]]; then
+    session_root="$HOME"
   fi
 }
 
