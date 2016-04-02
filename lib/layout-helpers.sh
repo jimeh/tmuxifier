@@ -189,9 +189,17 @@ load_window() {
 #   - $2: (optional) Override default window name.
 #
 load_session() {
-  local file="$1"
-  if [ ! -f "$file" ]; then
-    file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
+  local file
+  if [ "${1#*/}" = "$1" ]; then
+    # There's no slash in the path.
+    if [ -f "$TMUXIFIER_LAYOUT_PATH/$1.session.sh" ] || [ ! -f "$1" ]; then
+      file="$TMUXIFIER_LAYOUT_PATH/$1.session.sh"
+    else
+      # bash's 'source' requires an slash in the filename to not use $PATH.
+      file="./$1"
+    fi
+  else
+    file="$1"
   fi
 
   if [ -f "$file" ]; then
