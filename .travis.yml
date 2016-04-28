@@ -8,7 +8,7 @@ env:
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y bc build-essential libevent-dev libncurses5-dev
-  - wget http://downloads.sourceforge.net/tmux/tmux-${TMUX_VERSION}.tar.gz
+  - wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
   - tar -zxf tmux-${TMUX_VERSION}.tar.gz
   - cd tmux-${TMUX_VERSION}
   - ./configure && make && sudo make install
