@@ -105,6 +105,14 @@ select_pane() {
   tmuxifier-tmux select-pane -t "$session:$window.$1"
 }
 
+balance_windows_vertical() {
+  tmuxifier-tmux select-layout even-vertical
+}
+
+balance_windows_horizontal() {
+  tmuxifier-tmux select-layout even-horizontal
+}
+
 # Send/paste keys to the currently active pane/window.
 #
 # Arguments:
