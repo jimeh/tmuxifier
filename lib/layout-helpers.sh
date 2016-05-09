@@ -113,6 +113,14 @@ balance_windows_horizontal() {
   tmuxifier-tmux select-layout even-horizontal
 }
 
+synchronize_on() {
+  tmuxifier-tmux set-window-option synchronize-panes on
+}
+
+synchronize_off() {
+  tmuxifier-tmux set-window-option synchronize-panes off
+}
+
 # Send/paste keys to the currently active pane/window.
 #
 # Arguments:
