@@ -113,6 +113,21 @@ balance_windows_horizontal() {
   tmuxifier-tmux select-layout even-horizontal
 }
 
+# Wait for text to appear in a pane. Useful to wait before continuing execution
+#
+# Arguments:
+#   - $1: String to look for.
+#   - $2: Timeout if string does not show up.
+#   - $3: (optional) Target pane ID to send input to.
+#
+wait_for_text_event()
+{
+  if [ "$(__wait_for_text_helper $@)" != 0 ]
+  then
+    echo "Timeout: Wait for text $1"
+  fi
+}
+
 # Send/paste keys to the currently active pane/window.
 #
 # Arguments:
@@ -371,4 +386,14 @@ __go_to_window_or_session_path() {
     run_cmd "cd \"$target_path\""
     run_cmd "clear"
   fi
+}
+
+__wait_for_text_helper()
+{
+  timeout $2 bash <<EOT
+  while :; do
+    tmuxifier-tmux capture-pane -t "$session:$window.$3" -p | grep "$1" 2>&1 > /dev/null && break
+  done
+EOT
+  echo $?
 }
