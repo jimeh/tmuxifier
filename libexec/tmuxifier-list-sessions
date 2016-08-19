@@ -15,7 +15,7 @@ List all session layouts."
   exit
 fi
 
-list=$(find -L "$TMUXIFIER_LAYOUT_PATH" -name "*.session.sh")
+list=$(find -L "$TMUXIFIER_LAYOUT_PATH" -name "*.session.sh" | sort)
 for file in $list; do
   file=${file/$TMUXIFIER_LAYOUT_PATH\//}
   echo "${file/.session.sh/}"
