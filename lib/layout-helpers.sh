@@ -253,7 +253,7 @@ initialize_session() {
   tmuxifier-tmux start-server
 
   # Check if the named session already exists.
-  if tmuxifier-tmux has-session -t "$session:" 2>/dev/null; then
+  if tmuxifier-tmux list-sessions | grep -q "^$session:"; then
     return 1
   fi
 
