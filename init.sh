@@ -6,7 +6,7 @@ else
 fi
 
 # Add `bin` directroy to `$PATH`.
-if [ $(expr ":$PATH:" : ".*:$TMUXIFIER/bin:.*") -eq 0 ]; then
+if ! expr ":$PATH:" : ".*:$TMUXIFIER/bin:.*" >/dev/null; then
   export PATH="$TMUXIFIER/bin:$PATH"
 fi
 
