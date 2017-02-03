@@ -44,7 +44,9 @@ vercomp () {
 version=$(tmux -V)
 version=${version/tmux /}
 
-if [ -n "$1" ]; then
+if [ "$version" = master ]; then
+    echo '>'
+elif [ -n "$1" ]; then
   # Fix for "1.9a" version comparison, as vercomp() can only deal with
   # purely numeric version numbers.
   version=${version//+([a-zA-Z])/}
