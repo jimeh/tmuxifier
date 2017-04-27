@@ -44,7 +44,16 @@ vercomp () {
 version=$(tmux -V)
 version=${version/tmux /}
 
-if [ -n "$1" ]; then
+if [ -z "$1" ]; then
+  echo "$version"
+  exit
+fi
+
+if [ "$version" == "master" ]; then
+  # When version string is "master", tmux was compiled from source, and we
+  # assume it's later than whatever the <target-version> is.
+  echo '>'
+else
   # Fix for "1.9a" version comparison, as vercomp() can only deal with
   # purely numeric version numbers.
   version=${version//+([a-zA-Z])/}
@@ -55,6 +64,4 @@ if [ -n "$1" ]; then
     1) echo '>';;
     2) echo '<';;
   esac
-else
-  echo "$version"
 fi
