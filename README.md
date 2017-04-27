@@ -105,7 +105,7 @@ __In fish:__
 And add the following to your `~/.config/fish/config.fish` or equivalent:
 
 ```bash
-eval (tmuxifier init -)
+eval (tmuxifier init - fish)
 ```
 
 ### Custom Tmux Arguments
