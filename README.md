@@ -1,4 +1,5 @@
 # Tmuxifier [![Build Status](https://api.travis-ci.org/jimeh/tmuxifier.svg)](https://travis-ci.org/jimeh/tmuxifier)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjimeh%2Ftmuxifier.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjimeh%2Ftmuxifier?ref=badge_shield)
 
 Tmuxify your Tmux. Create, edit, manage and load complex Tmux session, window
 and pane configurations with ease.
@@ -270,3 +271,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjimeh%2Ftmuxifier.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjimeh%2Ftmuxifier?ref=badge_large)
