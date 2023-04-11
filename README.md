@@ -51,6 +51,8 @@ Which will yield a Tmux window looking like this:
 
 ## Installation
 
+### Manual
+
 Clone the repo to your machine:
 
     git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
@@ -76,11 +78,27 @@ set path = ( "~/.tmuxifier/bin" $path )
 set -gx PATH "~/.tmuxifier/bin" $PATH
 ```
 
-### Custom Installation Path
+#### Custom Installation Path
 
 To install Tmuxifier somewhere else than the suggested `~/.tmuxifier`, simply
 clone the repository to your custom location, and ensure the `bin` folder is
 added to your PATH making the `tmuxifier` executable available to you.
+
+### TPM
+
+You can also install and update Tmuxifier with
+[TPM](https://github.com/tmux-plugins/tpm):
+
+```bash
+set -g @plugin 'jimeh/tmuxifier'
+```
+
+Trigger TPM's install command with `prefix` + `I` to install Tmuxifier to TPM's
+plugin directory (default is `$HOME/.tmux/plugins`).
+
+To use the `tmuxifier` command, you will need to add the `bin` directory to your
+PATH. If you are using the default TPM plugin directory, the `bin` directory
+will be `$HOME/.tmux/plugins/tmuxifier/bin`.
 
 ## Setup
 
