@@ -19,7 +19,7 @@ Arguments:
                                 directory, or path to a session layout file.
    <iterm mode>               - When given as \"-CC\" tmux will be called with
                                 the -CC argument enabling iTerm2 integration.
-                                More info: http://bit.ly/1yDbMlm"
+                                More info: https://iterm2.com"
   exit
 fi
 
