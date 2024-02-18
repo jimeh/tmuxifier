@@ -363,7 +363,9 @@ finalize_and_go_to_session() {
 #   /Users/jimeh/Projects
 #
 __expand_path() {
-  echo $(eval echo "$@")
+  local path="$1"
+  path="${path/#\~/$HOME}"
+  echo "$path"
 }
 
 __get_first_window_index() {
