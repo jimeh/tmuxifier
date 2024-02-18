@@ -26,14 +26,14 @@ if calling-complete "$@"; then
 fi
 
 if [ -z "$1" ]; then
-  echo "$(tmuxifier-help load-window $@)" >&2
+  tmuxifier-help load-window "$@" >&2
   exit 1
 fi
 
 # Load runtime functions.
 source "$TMUXIFIER/lib/runtime.sh"
 
-if [ ! -z $TMUX ]; then
+if [ -n "$TMUX" ]; then
   session="$(tmuxifier-current-session)"
   load_window "$1"
 else

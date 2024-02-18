@@ -18,7 +18,7 @@ if calling-complete "$@"; then
 fi
 
 has-help() {
-  grep -i "^# Provide tmuxifier help" "$1" >/dev/null
+  grep -i "^# Provide tmuxifier help" "$1" > /dev/null
 }
 
 if [ -z "$1" ]; then
@@ -43,7 +43,7 @@ See 'tmuxifier help <command>' for information on a specific command."
   exit
 fi
 
-! command_path="$(tmuxifier-resolve-command-path "$1")"
+command_path="$(tmuxifier-resolve-command-path "$1")" || true
 
 if [ -z "$command_path" ]; then
   echo "tmuxifier: no such command '$1'" >&2

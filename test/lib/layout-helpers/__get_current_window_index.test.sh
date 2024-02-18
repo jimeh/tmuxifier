@@ -7,25 +7,25 @@ source "${root}/lib/layout-helpers.sh"
 #
 
 # When current window is the first and only window.
-create-test-session
+create-test-session "test"
 assert "__get_current_window_index" "0"
-kill-test-session
+kill-test-session "test"
 
 # When creating a second window.
-create-test-session
+create-test-session "test"
 test-socket-tmux new-window -t "$session:1"
 assert "__get_current_window_index" "1"
-kill-test-session
+kill-test-session "test"
 
 # When creating a second window and then switching back to the first window.
-create-test-session
+create-test-session "test"
 test-socket-tmux new-window -t "$session:1"
 test-socket-tmux select-window -t "$session:0"
 assert "__get_current_window_index" "0"
-kill-test-session
+kill-test-session "test"
 
 # When creating multiples windows and switching between them randomly.
-create-test-session
+create-test-session "test"
 assert "__get_current_window_index" "0"
 test-socket-tmux new-window -t "$session:1"
 assert "__get_current_window_index" "1"
@@ -41,8 +41,7 @@ test-socket-tmux select-window -t "$session:3"
 assert "__get_current_window_index" "3"
 test-socket-tmux select-window -t "$session:2"
 assert "__get_current_window_index" "2"
-kill-test-session
-
+kill-test-session "test"
 
 # End of tests.
 assert_end "__get_current_window_index()"

@@ -5,8 +5,9 @@ resolve_link() {
 }
 
 abs_dirname() {
-  local cwd="$(pwd)"
+  local cwd
   local path="$1"
+  cwd="$(pwd)"
 
   while [ -n "$path" ]; do
     cd "${path%/*}"
@@ -47,14 +48,13 @@ unset TMUXIFIER_NO_COMPLETE
 source "${testroot}/assert.sh"
 source "${testroot}/stub.sh"
 
-
 #
 # Test Helpers
 #
 
 test-socket-tmux() {
   export TMUXIFIER_TMUX_OPTS="-L tmuxifier-tests"
-  "$TMUX_BIN" $TMUXIFIER_TMUX_OPTS $@
+  "$TMUX_BIN" $TMUXIFIER_TMUX_OPTS "$@"
 }
 
 create-test-session() {
@@ -78,9 +78,10 @@ kill-test-server() {
 }
 
 test-socket-window-count() {
-  local list="$(test-socket-tmux list-windows)"
+  local list
+  list="$(test-socket-tmux list-windows)"
   if [ -n "$1" ]; then
-    echo "$list" | grep $1 | wc -l | awk '{print $1}'
+    echo "$list" | grep "$1" -c | awk '{print $1}'
   else
     echo "$list" | wc -l | awk '{print $1}'
   fi

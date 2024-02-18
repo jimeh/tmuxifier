@@ -7,24 +7,23 @@ source "${root}/lib/layout-helpers.sh"
 #
 
 # When first window has a index of 0.
-create-test-session
+create-test-session "test"
 assert "__get_first_window_index" "0"
-kill-test-session
+kill-test-session "test"
 
 # When first window has a index of 1.
-create-test-session
+create-test-session "test"
 test-socket-tmux new-window -t "$session:1"
 test-socket-tmux kill-window -t "$session:0"
 assert "__get_first_window_index" "1"
-kill-test-session
+kill-test-session "test"
 
 # When first window has a index of 2.
-create-test-session
+create-test-session "test"
 test-socket-tmux new-window -t "$session:2"
 test-socket-tmux kill-window -t "$session:0"
 assert "__get_first_window_index" "2"
-kill-test-session
-
+kill-test-session "test"
 
 # End of tests.
 assert_end "__get_first_window_index()"
