@@ -44,6 +44,9 @@ vercomp () {
 version=$(tmux -V)
 version=${version/tmux /}
 
+# Fix for tmux next-* versions
+version=${version/next-/}
+
 if [ -z "$1" ]; then
   echo "$version"
   exit
