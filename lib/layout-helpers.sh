@@ -37,7 +37,12 @@ new_window() {
 #   - $2: (optional) Target pane ID to split in current window.
 #
 split_v() {
-  if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  if [ "$(tmuxifier-tmux-version "3.0")" == ">" ]; then
+    # Tmux 3.1 and later.
+    if [ -n "$1" ]; then local percentage=(-l "$1"'%'); fi
+  else
+    if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  fi
   tmuxifier-tmux split-window -t "$session:$window.$2" -v "${percentage[@]}"
   __go_to_window_or_session_path
 }
@@ -49,7 +54,12 @@ split_v() {
 #   - $2: (optional) Target pane ID to split in current window.
 #
 split_h() {
-  if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  if [ "$(tmuxifier-tmux-version "3.0")" == ">" ]; then
+    # Tmux 3.1 and later.
+    if [ -n "$1" ]; then local percentage=(-l "$1"'%'); fi
+  else
+    if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  fi
   tmuxifier-tmux split-window -t "$session:$window.$2" -h "${percentage[@]}"
   __go_to_window_or_session_path
 }
