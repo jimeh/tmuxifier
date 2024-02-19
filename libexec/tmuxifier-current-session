@@ -14,8 +14,8 @@ Outputs the name of the current Tmux session."
 fi
 
 if [ -n "$TMUX" ]; then
-  for item in $(tmuxifier-tmux list-pane -F "#{session_name}");do
-    echo $item
+  for item in $(tmuxifier-tmux list-pane -F "#{session_name}"); do
+    echo "$item"
     exit 0
   done
 fi

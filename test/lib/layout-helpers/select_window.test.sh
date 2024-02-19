@@ -8,11 +8,11 @@ source "${root}/lib/layout-helpers.sh"
 
 window_list() {
   test-socket-tmux list-windows -t "$session:" \
-    -F "#{window_active}:#{window_index}" 2>/dev/null
+    -F "#{window_active}:#{window_index}" 2> /dev/null
 }
 
 # Selects given window when passed a window index
-create-test-session
+create-test-session "test"
 test-socket-tmux new-window -t "$session:1"
 test-socket-tmux new-window -t "$session:2"
 select_window 0
@@ -21,23 +21,22 @@ select_window 1
 assert "window_list | grep '^1:'" "1:1"
 select_window 2
 assert "window_list | grep '^1:'" "1:2"
-kill-test-session
+kill-test-session "test"
 
 # Selects given window when passed a window name
-create-test-session
+create-test-session "test"
 test-socket-tmux new-window -t "$session:1" -n "foo"
 test-socket-tmux new-window -t "$session:2" -n "bar"
 select_window foo
 assert "window_list | grep '^1:'" "1:1"
 select_window bar
 assert "window_list | grep '^1:'" "1:2"
-kill-test-session
-
+kill-test-session "test"
 
 # When called ensure it sets the $window variable to the index of the newly
 # created window.
 unset window
-create-test-session
+create-test-session "test"
 test-socket-tmux new-window -t "$session:1" -n "foo"
 test-socket-tmux new-window -t "$session:2" -n "bar"
 select_window "foo"
@@ -48,7 +47,7 @@ select_window 1
 assert "echo $window" "1"
 select_window 2
 assert "echo $window" "2"
-kill-test-session
+kill-test-session "test"
 unset window
 
 # End of tests.
