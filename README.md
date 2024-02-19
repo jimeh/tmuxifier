@@ -213,6 +213,18 @@ You can customize the layouts directory used by Tmuxifier by setting
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
 ```
 
+### Custom Templates Path
+
+You can customize the templates directory that are used for creating new window and session layouts
+`$TMUXIFIER_TEMPLATE_PATH`.
+
+```bash
+export TMUXIFIER_TEMPLATE_PATH="$HOME/.tmux-templates"
+```
+
+Then place `session.sh` and `window.sh` in the new directory.
+Check [templates](https://github.com/jimeh/tmuxifier/tree/master/templates) directory to see the default templates.
+
 ### Disable Shell-Completion
 
 Tmuxifier comes with shell-completion for bash, zsh, tcsh, and fish. If for any
