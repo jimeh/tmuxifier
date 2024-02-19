@@ -43,11 +43,35 @@ select_pane 0
 You can then load that window layout into a new window in the current tmux
 session using:
 
-    tmuxifier load-window example
+    tmuxifier load-window example.window.sh
 
 Which will yield a Tmux window looking like this:
 
 ![example](https://github.com/jimeh/tmuxifier/raw/master/examples/example.window-screenshot.png)
+
+
+We have a session layout file called [example.session.sh][] which
+looks like:
+
+[example.session.sh]: https://github.com/jimeh/tmuxifier/blob/master/examples/example.session.sh
+
+
+```bash
+session_root "~/Documents"
+if initialize_session "Session Name"; then
+  new_window "window 1"
+  run_cmd "pwd"
+  split_h 50
+  new_window "window 2"
+  run_cmd "top"
+fi
+finalize_and_go_to_session
+```
+
+You can then load that session layout into a new session in the
+tmux using:
+
+    tmuxifier load-session example.session.sh
 
 ## Installation
 
