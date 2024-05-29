@@ -19,6 +19,7 @@ tmux() {
 #
 new_window() {
   if [ -n "$1" ]; then local winarg=(-n "$1"); fi
+  if [ -n "$window" ]; then local winarg=(-n "$window"); fi
   if [ -n "$2" ]; then local command=("$2"); fi
 
   tmuxifier-tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
@@ -285,7 +286,7 @@ load_session() {
 #   fi
 #
 initialize_session() {
-  if [ -n "$1" ]; then
+  if [ -z "$session" ] && [ -n "$1" ]; then
     session="$1"
   fi
 

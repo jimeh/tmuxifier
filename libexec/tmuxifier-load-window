@@ -7,7 +7,7 @@ source "$TMUXIFIER/lib/util.sh"
 
 # Provide tmuxifier help
 if calling-help "$@"; then
-  echo "usage: tmuxifier load-window <layout_name | file_path>
+  echo "usage: tmuxifier load-window <layout_name | file_path> [<window name>]
 
 Aliases: window, win, w
 
@@ -15,7 +15,9 @@ Create a new window using the specified window layout in the current session.
 
 Arguments:
    <layout_name | file_path>  - Name of a window layout stored in the layouts
-                                directory, or path to a window layout file."
+                                directory, or path to a window layout file.
+   <window name>              - When given, overrides the name of the new window
+                                to be <window name>."
   exit
 fi
 
@@ -35,7 +37,7 @@ source "$TMUXIFIER/lib/runtime.sh"
 
 if [ ! -z $TMUX ]; then
   session="$(tmuxifier-current-session)"
-  load_window "$1"
+  load_window "$@"
 else
   echo "tmuxifier: 'load-window' command can only be used from within Tmux."
   exit 1
