@@ -1,0 +1,39 @@
+#! /usr/bin/env bash
+set -e
+[ -n "$TMUXIFIER_DEBUG" ] && set -x
+
+# Load internal utility functions.
+source "$TMUXIFIER/lib/util.sh"
+
+# Provide tmuxifier help
+if calling-help "$@"; then
+  echo "usage: tmuxifier delete-window <layout_name>
+
+Aliases: delete-win, dwin, dw
+
+Permanently delete specified window layout."
+  exit
+fi
+
+# Provide tmuxifier completions
+if calling-complete "$@"; then
+  tmuxifier-list-windows
+  exit
+fi
+
+if [ -z "$1" ]; then
+  echo "$(tmuxifier-help delete-window $@)" >&2
+  exit 1
+fi
+
+layout_name="$1"
+layout_file="$TMUXIFIER_LAYOUT_PATH/${layout_name}.window.sh"
+
+if [ ! -f "$layout_file" ]; then
+  echo "tmuxifier: window layout '$layout_name' does not exist." >&2
+  exit 1
+fi
+
+if rm -v --interactive "$layout_file" && [ -e "$layout_file" ]; then
+  echo "tmuxifier: window layout '$layout_file' was not deleted." >&2
+fi
