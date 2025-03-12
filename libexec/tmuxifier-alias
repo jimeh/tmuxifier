@@ -32,6 +32,12 @@ case "$1" in
   "edit-win" | "ewin" | "ew" )
     echo "edit-window"
     ;;
+  "delete-ses" | "dses" | "ds" )
+    echo "delete-session"
+    ;;
+  "delete-win" | "dwin" | "dw" )
+    echo "delete-window"
+    ;;
   "l" )
     echo "list"
     ;;
