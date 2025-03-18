@@ -3,12 +3,13 @@ set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
 resolve_link() {
-  $(type -p greadlink readlink | head -1) $1
+  $(type -p greadlink readlink | head -1) "$1"
 }
 
 abs_dirname() {
-  local cwd="$(pwd)"
+  local cwd
   local path="$1"
+  cwd="$(pwd)"
 
   while [ -n "$path" ]; do
     cd "${path%/*}"
@@ -22,11 +23,12 @@ abs_dirname() {
 
 if [ -z "${TMUXIFIER}" ]; then
   # Set TMUXIFIER relative to the "tmuxifier" executable.
-  export TMUXIFIER="$(dirname "$(abs_dirname "$0")")"
+  TMUXIFIER="$(dirname "$(abs_dirname "$0")")"
 else
   # Strip any trailing slash (/) characters from TMUXIFIER variable.
-  export TMUXIFIER="${TMUXIFIER%/}"
+  TMUXIFIER="${TMUXIFIER%/}"
 fi
+export TMUXIFIER
 
 # Load tmuxifier environment variables.
 source "$TMUXIFIER/lib/env.sh"
@@ -38,29 +40,25 @@ export PATH="$TMUXIFIER/libexec:$PATH"
 export TMUXIFIER_MIN_TMUX_VERSION="1.6"
 if [ "$(tmuxifier-tmux-version "$TMUXIFIER_MIN_TMUX_VERSION")" == "<" ]; then
   echo -e "ERROR: Tmuxifier requires Tmux v${TMUXIFIER_MIN_TMUX_VERSION}" \
-       "or newer. You have v$(tmuxifier-tmux-version)." >&2
+    "or newer. You have v$(tmuxifier-tmux-version)." >&2
   exit 1
 fi
 
 # Parse given command
 command="$1"
 case "$command" in
-  "" | "-h" | "--help" )
+  "" | "-h" | "--help")
     echo -e "tmuxifier $(tmuxifier-version)\n$(tmuxifier-help)" >&2
     ;;
-
-  "-v" | "--version" )
+  "-v" | "--version")
     tmuxifier-version
     ;;
-
-  * )
+  *)
     ! command_path="$(tmuxifier-resolve-command-path "$command")"
-
     if [ -z "$command_path" ]; then
       echo "tmuxifier: no such command '$command'" >&2
       exit 1
     fi
-
     shift 1
     exec "$command_path" "$@"
     ;;

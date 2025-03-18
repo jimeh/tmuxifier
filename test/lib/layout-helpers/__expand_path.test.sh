@@ -19,6 +19,12 @@ assert '__expand_path "/path/to/file"' "/path/to/file"
 # When given a path containing spaces, it returns path correctly.
 assert '__expand_path "~/Path To/File"' "${HOME}/Path To/File"
 
+# When given a relative path, it returns path as is.
+assert '__expand_path "foo/bar"' "foo/bar"
+
+# When given a relative parent path, it returns path as is.
+assert '__expand_path "../foo/bar"' "../foo/bar"
+
 # Tear down.
 HOME="$realHOME"
 unset realHOME

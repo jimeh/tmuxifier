@@ -7,7 +7,9 @@ source "$TMUXIFIER/lib/util.sh"
 
 # Provide tmuxifier help
 if calling-help "$@"; then
-  echo "usage: tmuxifier completion <command>
+  echo "usage: tmuxifier completions <command>
+
+Aliases: completion
 
 Print a list of available completions for specified command."
   exit
@@ -20,15 +22,15 @@ if calling-complete "$@"; then
 fi
 
 has-completions() {
-  grep -i "^# Provide tmuxifier completions" "$1" >/dev/null
+  grep -i "^# Provide tmuxifier completions" "$1" > /dev/null
 }
 
 if [ -z "$1" ]; then
-  echo "$(tmuxifier-help completions $@)" >&2
+  tmuxifier-help completions "$@" >&2
   exit 1
 fi
 
-! command_path="$(tmuxifier-resolve-command-path "$1")"
+command_path="$(tmuxifier-resolve-command-path "$1")" || true
 
 if [ -n "$command_path" ] && has-completions "$command_path"; then
   shift

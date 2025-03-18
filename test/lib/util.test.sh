@@ -34,7 +34,6 @@ assert_raises 'calling-help welcome-home' 1
 # End of tests.
 assert_end "calling-help()"
 
-
 #
 # calling-complete() tests.
 #

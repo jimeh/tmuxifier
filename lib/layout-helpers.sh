@@ -140,7 +140,7 @@ balance_windows_horizontal() {
 #
 synchronize_on() {
   tmuxifier-tmux set-window-option -t "$session:${1:-$window}" \
-                 synchronize-panes on
+    synchronize-panes on
 }
 
 # Turn off synchronize-panes in a window.
@@ -150,7 +150,7 @@ synchronize_on() {
 #
 synchronize_off() {
   tmuxifier-tmux set-window-option -t "$session:${1:-$window}" \
-                 synchronize-panes off
+    synchronize-panes off
 }
 
 # Send/paste keys to the currently active pane/window.
@@ -180,7 +180,9 @@ run_cmd() {
 #   - $1: Directory path to use for session root.
 #
 session_root() {
-  local dir="$(__expand_path $@)"
+  local dir
+  dir="$(__expand_path "$@")"
+
   if [ -d "$dir" ]; then
     session_root="$dir"
   fi
@@ -192,7 +194,9 @@ session_root() {
 #   - $1: Directory path to use for window root.
 #
 window_root() {
-  local dir="$(__expand_path $@)"
+  local dir
+  dir="$(__expand_path "$@")"
+
   if [ -d "$dir" ]; then
     window_root="$dir"
   fi
@@ -214,9 +218,11 @@ load_window() {
     if [ $# -gt 1 ]; then
       window="$2"
     else
-      window="${1/%.window.sh}"
-      window="${window/%.sh}"
+      window="${1/%.window.sh/}"
+      window="${window/%.sh/}"
     fi
+
+    # shellcheck disable=SC1090
     source "$file"
     window=
 
@@ -258,11 +264,12 @@ load_session() {
   if [ $# -gt 1 ]; then
     session="$2"
   else
-    session="${1/%.session.sh}"
-    session="${session/%.sh}"
+    session="${1/%.session.sh/}"
+    session="${session/%.sh/}"
   fi
 
   set_default_path=true
+  # shellcheck disable=SC1090
   source "$file"
   session=
 
@@ -304,11 +311,11 @@ initialize_session() {
 
     # Set default-path for session
     if [ -n "$session_root" ] && [ -d "$session_root" ]; then
-      cd "$session_root"
+      cd "$session_root" || return 1
 
       $set_default_path && tmuxifier-tmux \
         set-option -t "$session:" \
-        default-path "$session_root" 1>/dev/null
+        default-path "$session_root" 1> /dev/null
     fi
 
   # Tmux 1.9 and later.
@@ -329,7 +336,8 @@ initialize_session() {
   # In order to ensure only specified windows are created, we move the
   # default window to position 999, and later remove it with the
   # `finalize_and_go_to_session` function.
-  local first_window_index=$(__get_first_window_index)
+  local first_window_index
+  first_window_index="$(__get_first_window_index)"
   tmuxifier-tmux move-window \
     -s "$session:$first_window_index" -t "$session:999"
 }
@@ -344,12 +352,11 @@ initialize_session() {
 # created, but already existed, then we'll need to specifically switch to it.
 #
 finalize_and_go_to_session() {
-  ! tmuxifier-tmux kill-window -t "$session:999" 2>/dev/null
+  ! tmuxifier-tmux kill-window -t "$session:999" 2> /dev/null
   if [[ "$(tmuxifier-current-session)" != "$session" ]]; then
     __go_to_session
   fi
 }
-
 
 #
 # Internal functions
@@ -363,12 +370,17 @@ finalize_and_go_to_session() {
 #   /Users/jimeh/Projects
 #
 __expand_path() {
-  echo $(eval echo "$@")
+  local path="$1"
+  path="${path/#\~/$HOME}"
+  echo "$path"
 }
 
 __get_first_window_index() {
-  local index=$(tmuxifier-tmux list-windows -t "$session:" \
-    -F "#{window_index}" 2>/dev/null)
+  local index
+  index="$(
+    tmuxifier-tmux list-windows \
+      -t "$session:" -F "#{window_index}" 2> /dev/null
+  )"
 
   if [ -n "$index" ]; then
     echo "$index" | head -1
@@ -378,16 +390,20 @@ __get_first_window_index() {
 }
 
 __get_current_window_index() {
-  local lookup=$(tmuxifier-tmux list-windows -t "$session:" \
-    -F "#{window_active}:#{window_index}" 2>/dev/null | grep "^1:")
+  local lookup
+  lookup="$(
+    tmuxifier-tmux list-windows -t "$session:" \
+      -F "#{window_active}:#{window_index}" 2> /dev/null | grep "^1:"
+  )"
 
   if [ -n "$lookup" ]; then
-    echo "${lookup/1:}"
+    echo "${lookup/1:/}"
   fi
 }
 
 __go_to_session() {
   if [ -z "$TMUX" ]; then
+    # shellcheck disable=2086
     tmuxifier-tmux $TMUXIFIER_TMUX_ITERM_ATTACH -u \
       attach-session -t "$session:"
   else
