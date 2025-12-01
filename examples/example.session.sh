@@ -4,17 +4,14 @@ session_root "~/Documents"
 
 # Create session with specified name if it does not already exist. If no
 # argument is given, session name will be based on layout file name.
-if initialize_session "Example Session"; then
+if initialize_session "Session Name"; then
 
   # Create a new window inline within session layout definition.
-  new_window "In-line Window"
-  tmux split-window -t "$session:$window.0" -v -p 50
-
-  # Load a defined window layout.
-  load_window "example"
-
-  # Select the default active window on session creation.
-  select_window 0
+  new_window "window 1"
+  run_cmd "pwd"
+  split_h 50
+  new_window "window 2"
+  run_cmd "top"
 
 fi
 
