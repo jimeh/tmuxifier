@@ -29,7 +29,7 @@ Given we have a window layout file called [example.window.sh][] which looks
 like:
 
 [example.window.sh]:
-  https://github.com/jimeh/tmuxifier/blob/master/examples/example.window.sh
+  https://github.com/jimeh/tmuxifier/blob/main/examples/example.window.sh
 
 ```bash
 window_root "~/Desktop"
@@ -47,7 +47,7 @@ session using:
 
 Which will yield a Tmux window looking like this:
 
-![example](https://github.com/jimeh/tmuxifier/raw/master/examples/example.window-screenshot.png)
+![example](https://github.com/jimeh/tmuxifier/raw/main/examples/example.window-screenshot.png)
 
 ## Installation
 
@@ -200,7 +200,7 @@ To load the session layout simply run:
 You'll now have a new Tmux session with your previously defined awesome window
 in it.
 
-[examples]: https://github.com/jimeh/tmuxifier/tree/master/examples
+[examples]: https://github.com/jimeh/tmuxifier/tree/main/examples
 
 ## Configure & Customize
 
