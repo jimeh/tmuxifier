@@ -7,7 +7,7 @@ source "$TMUXIFIER/lib/util.sh"
 
 # Provide tmuxifier help
 if calling-help "$@"; then
-  echo "usage: tmuxifier load-session <layout_name | file_path> [<iterm mode>]
+  echo "usage: tmuxifier load-session <layout_name | file_path> [<iterm mode>] [<session name>]
 
 Aliases: session, ses, s
 
@@ -19,7 +19,9 @@ Arguments:
                                 directory, or path to a session layout file.
    <iterm mode>               - When given as \"-CC\" tmux will be called with
                                 the -CC argument enabling iTerm2 integration.
-                                More info: https://iterm2.com"
+                                More info: https://iterm2.com
+   <session name>             - When given, overrides the name of the new session
+                                to be <session name>."
   exit
 fi
 
@@ -37,9 +39,18 @@ fi
 # Load runtime functions.
 source "$TMUXIFIER/lib/runtime.sh"
 
-if [ "$2" == "-CC" ]; then
-  export TMUXIFIER_TMUX_ITERM_ATTACH="-CC"
-fi
+# If -CC is in the argument list, set TMUXIFIER_TMUX_ITERM_ATTACH
+# and then remove the argument from $@.
+for arg
+do
+    shift
+    if test "$arg" = "-CC"
+    then
+        export TMUXIFIER_TMUX_ITERM_ATTACH="-CC"
+        continue
+    fi
+    set -- "$@" "$arg"
+done
 
 # Load session file.
-load_session "$1"
+load_session "$@"
