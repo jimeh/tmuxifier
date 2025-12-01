@@ -2,6 +2,8 @@
 set -e
 [ -n "$TMUXIFIER_DEBUG" ] && set -x
 
+TMUXIFIER_TEMPLATE_PATH=${TMUXIFIER_TEMPLATE_PATH:="$TMUXIFIER/templates"}
+
 # Load internal utility functions.
 source "$TMUXIFIER/lib/util.sh"
 
@@ -28,7 +30,7 @@ fi
 
 layout_name="$1"
 layout_file="$TMUXIFIER_LAYOUT_PATH/${layout_name}.session.sh"
-template="$TMUXIFIER/templates/session.sh"
+template="$TMUXIFIER_TEMPLATE_PATH/session.sh"
 
 if [ ! -f "$template" ]; then
   echo "tmuxifier: session layout template not found: $template" >&2
