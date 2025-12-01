@@ -75,7 +75,7 @@ set path = ( "~/.tmuxifier/bin" $path )
 **In fish:**
 
 ```bash
-set -gx PATH "~/.tmuxifier/bin" $PATH
+set -gx PATH ~/.tmuxifier/bin $PATH
 ```
 
 #### Custom Installation Path
