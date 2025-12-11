@@ -24,7 +24,7 @@ new_window() {
   tmuxifier-tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
 
   # Disable renaming if a window name was given.
-  if [ -n "$1" ]; then tmuxifier-tmux set-option -t "$1" allow-rename off; fi
+  if [ -n "$1" ]; then tmuxifier-tmux set-option -w -t "$session:$1" allow-rename off; fi
 
   window="$(__get_current_window_index)"
   __go_to_window_or_session_path
@@ -308,7 +308,7 @@ initialize_session() {
 
       $set_default_path && tmuxifier-tmux \
         set-option -t "$session:" \
-        default-path "$session_root" 1> /dev/null
+        default-path "$session_root" 1>/dev/null
     fi
 
   # Tmux 1.9 and later.
@@ -344,7 +344,7 @@ initialize_session() {
 # created, but already existed, then we'll need to specifically switch to it.
 #
 finalize_and_go_to_session() {
-  ! tmuxifier-tmux kill-window -t "$session:999" 2> /dev/null
+  ! tmuxifier-tmux kill-window -t "$session:999" 2>/dev/null
   if [[ "$(tmuxifier-current-session)" != "$session" ]]; then
     __go_to_session
   fi
@@ -367,7 +367,7 @@ __expand_path() {
 
 __get_first_window_index() {
   local index=$(tmuxifier-tmux list-windows -t "$session:" \
-    -F "#{window_index}" 2> /dev/null)
+    -F "#{window_index}" 2>/dev/null)
 
   if [ -n "$index" ]; then
     echo "$index" | head -1
@@ -378,7 +378,7 @@ __get_first_window_index() {
 
 __get_current_window_index() {
   local lookup=$(tmuxifier-tmux list-windows -t "$session:" \
-    -F "#{window_active}:#{window_index}" 2> /dev/null | grep "^1:")
+    -F "#{window_active}:#{window_index}" 2>/dev/null | grep "^1:")
 
   if [ -n "$lookup" ]; then
     echo "${lookup/1:/}"
