@@ -14,6 +14,10 @@ new_window "{{WINDOW_NAME}}"
 #run_cmd "top"     # runs in active pane
 #run_cmd "date" 1  # runs in pane 1
 
+# Loop a command
+#loop_cmd "htop"   # repeatedly runs in active pane
+#loop_cmd "htop" 1 # rpeatedly runs in pane 1
+
 # Paste text
 #send_keys "top"    # paste into active pane
 #send_keys "date" 1 # paste into pane 1

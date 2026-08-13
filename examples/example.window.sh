@@ -10,6 +10,7 @@ new_window "Example Window"
 split_v 20
 run_cmd "watch -t date"
 split_h 60
+loop_cmd htop
 
 # Set active pane.
 select_pane 0

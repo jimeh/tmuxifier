@@ -174,6 +174,17 @@ run_cmd() {
   send_keys "C-m" "$2"
 }
 
+# Repeatedly runs a shell command in the currently active pane/window.
+#
+# Arguments:
+#   - $1: Shell command to repeatedly run.
+#   - $2: (optional) Target pane ID to run command in.
+#
+loop_cmd() {
+  send_keys "while true; do $1; done" "$2"
+  send_keys "C-m" "$2"
+}
+
 # Customize session root path. Default is `$HOME`.
 #
 # Arguments:
